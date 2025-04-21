@@ -3,601 +3,679 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Berita Terkini - Indonesia Update</title>
+    <title>Sehat Kita - Portal Berita Kesehatan Terpercaya</title>
     <style>
+        :root {
+            --primary-color: #0088cc;
+            --secondary-color: #e8f4f8;
+            --accent-color: #ff6b6b;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --medium-gray: #ddd;
+            --dark-gray: #666;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
+
         body {
-            background-color: #f4f4f4;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
         }
-        header {
-            background-color: #1a2c5b;
-            color: white;
-            padding: 10px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+
+        .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
+
+        .top-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-header .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .main-header {
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        .logo h1 {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .tagline {
+            color: var(--dark-gray);
+            font-style: italic;
+            font-size: 16px;
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            padding: 15px 0;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
+            gap: 30px;
         }
-        nav ul li {
-            margin-left: 20px;
-        }
-        nav ul li a {
-            color: white;
+
+        nav a {
+            color: var(--text-color);
             text-decoration: none;
-            font-size: 16px;
+            font-weight: 600;
+            padding: 5px 0;
+            transition: color 0.3s;
         }
-        nav ul li a:hover {
-            text-decoration: underline;
+
+        nav a:hover {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
         }
-        .main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+
+        /* Main Content */
+        main {
+            padding: 40px 0;
         }
-        .top-news {
-            margin-bottom: 30px;
-        }
-        .top-news img {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        .headline {
-            font-size: 32px;
-            margin: 15px 0;
-            color: #1a2c5b;
-        }
-        .subheadline {
-            font-size: 18px;
-            color: #555;
+
+        .breadcrumb {
+            color: var(--dark-gray);
             margin-bottom: 20px;
-            line-height: 1.5;
+            font-size: 0.9rem;
         }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
         .article {
-            margin-bottom: 30px;
-            line-height: 1.6;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
         }
-        .article p {
+
+        .article-header {
+            padding: 30px;
+            background-color: var(--secondary-color);
+        }
+
+        .article-header h1 {
+            font-size: 36px;
             margin-bottom: 15px;
-            font-size: 16px;
-            color: #333;
+            color: var(--text-color);
         }
-        .news-grid {
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .article-meta .author {
+            font-weight: 600;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            background-image: url('/api/placeholder/1200/400');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .article-content {
+            padding: 30px;
+        }
+
+        .article-content p, .article-content ul, .article-content h2, .article-content h3 {
+            margin-bottom: 20px;
+        }
+
+        .article-content h2 {
+            font-size: 28px;
+            margin-top: 40px;
+            color: var(--primary-color);
+        }
+
+        .article-content h3 {
+            font-size: 22px;
+            margin-top: 30px;
+            color: var(--text-color);
+        }
+
+        .article-content ul {
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background-color: var(--secondary-color);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        .related-articles {
+            margin-top: 50px;
+        }
+
+        .related-articles h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .related-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-bottom: 40px;
         }
-        .news-card {
-            background-color: white;
+
+        .related-card {
+            background: white;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
         }
-        .news-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
+
+        .related-card:hover {
+            transform: translateY(-5px);
         }
-        .news-card-content {
+
+        .related-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .related-content {
             padding: 15px;
         }
-        .news-card h3 {
+
+        .related-content h4 {
+            margin-bottom: 10px;
             font-size: 18px;
+        }
+
+        .related-content a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .related-content a:hover {
+            color: var(--primary-color);
+        }
+
+        .related-meta {
+            color: var(--dark-gray);
+            font-size: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            padding: 50px 0 30px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
             margin-bottom: 10px;
-            color: #1a2c5b;
         }
-        .news-card p {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 10px;
+
+        .footer-column a {
+            color: var(--text-color);
+            text-decoration: none;
         }
-        .time {
-            font-size: 12px;
-            color: #999;
+
+        .footer-column a:hover {
+            color: var(--primary-color);
         }
-        .kategori {
-            color: #1a2c5b;
-            font-weight: bold;
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            border-bottom: 2px solid #1a2c5b;
-            font-size: 24px;
-        }
-        .continue-btn-container {
+
+        .copyright {
+            margin-top: 40px;
             text-align: center;
-            padding: 20px 0 40px;
+            color: var(--dark-gray);
+            padding-top: 20px;
+            border-top: 1px solid var(--medium-gray);
         }
-        .continue-btn {
-            font-size: 12px;
-            padding: 5px 10px;
-            background-color: #1a2c5b;
-            color: white;
+
+        .contact-btn {
+            background: none;
             border: none;
-            border-radius: 4px;
+            color: var(--text-color);
             cursor: pointer;
+            font-size: 16px;
+            padding: 0;
+            text-align: left;
+            font-weight: normal;
+            appearance: none;
         }
+
+        .contact-btn:hover {
+            color: var(--primary-color);
+        }
+
+        /* Modal */
         .modal {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
-            z-index: 100;
+            display: flex;
             justify-content: center;
             align-items: center;
+            z-index: 1000;
         }
+
         .modal-content {
             background-color: white;
             padding: 30px;
             border-radius: 8px;
-            max-width: 400px;
-            width: 100%;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
         }
+
         .modal h2 {
+            color: var(--primary-color);
             margin-bottom: 20px;
-            color: #1a2c5b;
         }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
+
+        .captcha-box {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-size: 20px;
+            letter-spacing: 3px;
             font-weight: bold;
-            color: #333;
         }
-        .input-group input {
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
+            padding: 12px;
+            border: 1px solid var(--medium-gray);
             border-radius: 4px;
+            font-size: 16px;
         }
-        .submit-btn {
-            padding: 10px 20px;
-            background-color: #1a2c5b;
+
+        .form-button {
+            background-color: var(--primary-color);
             color: white;
             border: none;
+            padding: 12px 25px;
             border-radius: 4px;
             cursor: pointer;
-            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
         }
-        .footer {
-            background-color: #1a2c5b;
-            color: white;
-            padding: 30px 0;
-            margin-top: 40px;
+
+        .form-button:hover {
+            background-color: #006699;
         }
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
+
+        .error-message {
+            color: var(--accent-color);
+            margin-top: 10px;
         }
-        .footer-section h3 {
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-        .footer-section ul {
-            list-style: none;
-        }
-        .footer-section ul li {
-            margin-bottom: 8px;
-        }
-        .footer-section ul li a {
-            color: #ddd;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .footer-section ul li a:hover {
-            text-decoration: underline;
-        }
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            margin-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 12px;
-            color: #ddd;
-        }
+
         .secret-page {
-            display: none;
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .secret-page h1 {
-            color: #1a2c5b;
-            margin-bottom: 30px;
+            padding: 50px;
             text-align: center;
+            font-size: 24px;
+            display: none;
         }
-        .image-gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        .gallery-image {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+
         @media (max-width: 768px) {
-            .news-grid {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .article-header h1 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-content {
                 grid-template-columns: 1fr;
             }
-            .footer-container {
-                grid-template-columns: 1fr 1fr;
-            }
-            .image-gallery {
+
+            .related-grid {
                 grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <a href="#" class="logo">Indonesia Update</a>
-            <nav>
-                <ul>
-                    <li><a href="#">Beranda</a></li>
-                    <li><a href="#">Politik</a></li>
-                    <li><a href="#">Ekonomi</a></li>
-                    <li><a href="#">Olahraga</a></li>
-                    <li><a href="#">Teknologi</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div id="root"></div>
 
-    <div class="main-content">
-        <div class="top-news">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqsjor2l0yAZgJRA0agukH1hMvFVR85sp3J6uBhAJaTRtQCLmGHG_YW5Q&s=10" alt="Berita Utama">
-            <h1 class="headline">Pemerintah Luncurkan Program Pembangunan Infrastruktur Baru di Indonesia Timur</h1>
-            <p class="subheadline">Program senilai triliunan rupiah ini bertujuan untuk mengurangi kesenjangan ekonomi antara Indonesia Barat dan Timur melalui pembangunan pelabuhan, bandara, dan jalan raya.</p>
-            <div class="article">
-                <p>Jakarta, 21 April 2025 - Pemerintah Indonesia hari ini secara resmi meluncurkan program pembangunan infrastruktur berskala besar yang ditargetkan untuk wilayah Indonesia Timur. Program yang diberi nama "Pemerataan Pembangunan Nusantara" ini akan berlangsung selama lima tahun ke depan dengan anggaran awal sebesar Rp 500 triliun.</p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function generateRandomCode() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < 6; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        function App() {
+            const [showModal, setShowModal] = useState(false);
+            const [captchaCode, setCaptchaCode] = useState('');
+            const [userInput, setUserInput] = useState('');
+            const [errorMessage, setErrorMessage] = useState('');
+            const [showSecretPage, setShowSecretPage] = useState(false);
+            const secretCode = '0107387129';
+
+            useEffect(() => {
+                if (showModal) {
+                    setCaptchaCode(generateRandomCode());
+                }
+            }, [showModal]);
+
+            const handleContactClick = () => {
+                setShowModal(true);
+                setUserInput('');
+                setErrorMessage('');
+            };
+
+            const handleCaptchaSubmit = (e) => {
+                e.preventDefault();
                 
-                <p>Menteri Koordinator Bidang Perekonomian, Dr. Ahmad Santoso, menjelaskan bahwa program ini merupakan upaya strategis pemerintah untuk mengurangi kesenjangan ekonomi yang telah lama terjadi antara kawasan barat dan timur Indonesia. "Selama ini pembangunan terlalu terpusat di Jawa dan Sumatera. Saatnya kita memberikan perhatian lebih kepada saudara-saudara kita di timur," ujarnya dalam konferensi pers di Istana Negara.</p>
+                // Check for secret code
+                if (userInput === secretCode) {
+                    setShowModal(false);
+                    setShowSecretPage(true);
+                    return;
+                }
                 
-                <p>Program ini akan mencakup pembangunan lima pelabuhan baru, tiga bandara internasional, jaringan jalan sepanjang 2.500 kilometer, serta peningkatan kapasitas listrik sebesar 2.000 megawatt. Wilayah yang menjadi fokus utama meliputi Provinsi Papua, Papua Barat, Maluku, Maluku Utara, serta Nusa Tenggara Timur.</p>
-                
-                <p>Presiden menekankan bahwa proyek ini tidak hanya sekadar pembangunan fisik, tetapi juga melibatkan transfer teknologi dan peningkatan kapasitas sumber daya manusia lokal. "Kita tidak hanya membangun infrastruktur, tetapi juga membangun manusianya. Kita ingin masyarakat lokal bisa terlibat aktif dan merasakan manfaat langsung dari pembangunan ini," kata Presiden.</p>
-                
-                <p>Menteri Keuangan, Dra. Siti Rahayu, menambahkan bahwa pendanaan proyek akan berasal dari APBN, kerja sama pemerintah dengan badan usaha (KPBU), serta pinjaman dari lembaga keuangan internasional. "Kami telah melakukan perhitungan yang matang untuk memastikan keberlanjutan fiskal. Program ini tidak akan membebani keuangan negara dalam jangka panjang," jelasnya.</p>
-                
-                <p>Respons positif datang dari berbagai kalangan, termasuk dari para gubernur di wilayah Indonesia Timur. Gubernur Papua, John Wempi, menyambut baik program tersebut dan berharap implementasinya dapat berjalan sesuai rencana. "Ini adalah kabar gembira bagi masyarakat Papua. Kami siap mendukung penuh program ini dan memastikan pelaksanaannya tepat sasaran," ujarnya.</p>
-                
-                <p>Namun, beberapa pengamat ekonomi menyoroti pentingnya transparansi dan pengawasan ketat dalam pelaksanaan program. "Program sebesar ini rentan terhadap penyelewengan. Pemerintah harus memastikan adanya mekanisme pengawasan yang kuat," kata ekonom dari Universitas Indonesia, Prof. Dr. Bambang Widjaja.</p>
-                
-                <p>Tahap pertama program ini akan dimulai bulan depan, dengan groundbreaking proyek pelabuhan di Sorong, Papua Barat. Pemerintah menargetkan 30% dari keseluruhan proyek dapat diselesaikan dalam dua tahun pertama.</p>
-            </div>
-        </div>
-
-        <h2 class="kategori">Berita Terkini</h2>
-        
-        <div class="news-grid">
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Politik">
-                <div class="news-card-content">
-                    <h3>DPR Sahkan RUU Perlindungan Data Pribadi</h3>
-                    <p>Undang-undang baru tentang perlindungan data pribadi akhirnya disahkan setelah pembahasan selama tiga tahun.</p>
-                    <span class="time">2 jam lalu</span>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Ekonomi">
-                <div class="news-card-content">
-                    <h3>Inflasi Turun ke Level 3,2%, Ekonom Optimis</h3>
-                    <p>Bank Indonesia melaporkan penurunan angka inflasi yang signifikan sejak awal tahun ini.</p>
-                    <span class="time">4 jam lalu</span>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Teknologi">
-                <div class="news-card-content">
-                    <h3>Indonesia Luncurkan Satelit Komunikasi Terbaru</h3>
-                    <p>Satelit Nusantara-1 berhasil diluncurkan dari pangkalan luar angkasa di Kazakhstan.</p>
-                    <span class="time">5 jam lalu</span>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="kategori">Politik</h2>
-        
-        <div class="news-grid">
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Politik">
-                <div class="news-card-content">
-                    <h3>Koalisi Partai Besar Bentuk Poros Baru</h3>
-                    <p>Tiga partai politik dengan suara terbanyak di parlemen mengumumkan pembentukan koalisi baru.</p>
-                    <span class="time">8 jam lalu</span>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Politik">
-                <div class="news-card-content">
-                    <h3>Menteri Luar Negeri Kunjungi Lima Negara ASEAN</h3>
-                    <p>Kunjungan diplomatik ini bertujuan memperkuat kerja sama regional dalam menghadapi tantangan global.</p>
-                    <span class="time">10 jam lalu</span>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Politik">
-                <div class="news-card-content">
-                    <h3>KPK Tetapkan Tersangka Baru Kasus Korupsi Infrastruktur</h3>
-                    <p>Dua pejabat tinggi kementerian dan satu pengusaha ditetapkan sebagai tersangka dalam kasus megaproyek.</p>
-                    <span class="time">12 jam lalu</span>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="kategori">Ekonomi & Bisnis</h2>
-        
-        <div class="news-grid">
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Ekonomi">
-                <div class="news-card-content">
-                    <h3>Rupiah Menguat ke Level Rp 14.200 per Dolar AS</h3>
-                    <p>Penguatan rupiah didukung oleh membaiknya fundamental ekonomi dan arus modal asing yang masuk.</p>
-                    <span class="time">6 jam lalu</span>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Ekonomi">
-                <div class="news-card-content">
-                    <h3>Bursa Saham Indonesia Cetak Rekor Tertinggi Baru</h3>
-                    <p>IHSG menembus level 7.500 untuk pertama kalinya dalam sejarah pasar modal Indonesia.</p>
-                    <span class="time">9 jam lalu</span>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Ekonomi">
-                <div class="news-card-content">
-                    <h3>Startup Fintech Lokal Dapatkan Pendanaan Rp 2 Triliun</h3>
-                    <p>Pendanaan seri C ini menjadikan perusahaan fintech tersebut sebagai unicorn terbaru dari Indonesia.</p>
-                    <span class="time">11 jam lalu</span>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="kategori">Olahraga</h2>
-        
-        <div class="news-grid">
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Olahraga">
-                <div class="news-card-content">
-                    <h3>Timnas Indonesia Kalahkan Thailand 3-1</h3>
-                    <p>Kemenangan ini mengantarkan Timnas melaju ke semifinal Piala AFF 2025.</p>
-                    <span class="time">5 jam lalu</span>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Olahraga">
-                <div class="news-card-content">
-                    <h3>Atlet Lari Indonesia Pecahkan Rekor Asia</h3>
-                    <p>Lalu Muhammad Zohri mencetak waktu 9,90 detik untuk lari 100 meter di kejuaraan Asia.</p>
-                    <span class="time">8 jam lalu</span>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Olahraga">
-                <div class="news-card-content">
-                    <h3>Liga Indonesia Akan Gunakan VAR di Semua Pertandingan</h3>
-                    <p>PSSI mengumumkan penggunaan teknologi VAR untuk semua pertandingan Liga 1 mulai musim depan.</p>
-                    <span class="time">10 jam lalu</span>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="kategori">Teknologi</h2>
-        
-        <div class="news-grid">
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Teknologi">
-                <div class="news-card-content">
-                    <h3>Indonesia Resmikan Pusat Data Nasional di Jogyakarta</h3>
-                    <p>Pusat data berkapasitas besar ini akan mendukung transformasi digital pemerintahan.</p>
-                    <span class="time">7 jam lalu</span>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Teknologi">
-                <div class="news-card-content">
-                    <h3>Aplikasi Transportasi Lokal Hadirkan Fitur Keselamatan Baru</h3>
-                    <p>Fitur "Perjalanan Aman" memungkinkan pengguna berbagi lokasi real-time dengan kontak darurat.</p>
-                    <span class="time">9 jam lalu</span>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Teknologi">
-                <div class="news-card-content">
-                    <h3>Peneliti Indonesia Kembangkan Robot Pendeteksi Bencana</h3>
-                    <p>Robot ciptaan tim ITB ini mampu menjelajah area bencana yang sulit diakses manusia.</p>
-                    <span class="time">13 jam lalu</span>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="kategori">Gaya Hidup</h2>
-        
-        <div class="news-grid">
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Gaya Hidup">
-                <div class="news-card-content">
-                    <h3>Tren Kuliner 2025: Makanan Fusion Nusantara</h3>
-                    <p>Para chef Indonesia mempopulerkan kombinasi makanan tradisional dengan teknik memasak modern.</p>
-                    <span class="time">6 jam lalu</span>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Gaya Hidup">
-                <div class="news-card-content">
-                    <h3>Festival Film Indonesia Akan Digelar di 10 Kota</h3>
-                    <p>Festival tahunan ini akan menampilkan lebih dari 100 film karya sineas Indonesia.</p>
-                    <span class="time">11 jam lalu</span>
-                </div>
-            </div>
-            
-            <div class="news-card">
-                <img src="/api/placeholder/400/200" alt="Berita Gaya Hidup">
-                <div class="news-card-content">
-                    <h3>Desainer Muda Indonesia Pamerkan Karya di Paris Fashion Week</h3>
-                    <p>Koleksi berbahan dasar tenun nusantara mendapat apresiasi dari kritikus mode internasional.</p>
-                    <span class="time">14 jam lalu</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="continue-btn-container">
-            <button class="continue-btn" id="lanjutBtn">Lanjut</button>
-        </div>
-    </div>
-
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <h2>Verifikasi bahwa anda manusia dengan menuliskan Ovei sebagai nama dan 194jsm sebagai password</h2>
-            <div class="input-group">
-                <label for="username">Nama Pengguna:</label>
-                <input type="text" id="username" placeholder="Masukkan nama pengguna">
-            </div>
-            <div class="input-group">
-                <label for="password">Kata Sandi:</label>
-                <input type="password" id="password" placeholder="Masukkan kata sandi">
-            </div>
-            <button class="submit-btn" id="submitBtn">Masuk</button>
-        </div>
-    </div>
-
-    <div class="secret-page" id="secretPage">
-        <h1>Halaman Rahasia</h1>
-        <div class="image-gallery">
-            <img src="/api/placeholder/600/400" alt="Informasi Rahasia 1" class="gallery-image">
-            <img src="/api/placeholder/600/400" alt="Informasi Rahasia 2" class="gallery-image">
-            <img src="/api/placeholder/600/400" alt="Informasi Rahasia 3" class="gallery-image">
-            <img src="/api/placeholder/600/400" alt="Informasi Rahasia 4" class="gallery-image">
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Tentang Kami</h3>
-                <ul>
-                    <li><a href="#">Profil Perusahaan</a></li>
-                    <li><a href="#">Redaksi</a></li>
-                    <li><a href="#">Pedoman Media</a></li>
-                    <li><a href="#">Karir</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Layanan</h3>
-                <ul>
-                    <li><a href="#">Langganan Berita</a></li>
-                    <li><a href="#">Pasang Iklan</a></li>
-                    <li><a href="#">Kerjasama Media</a></li>
-                    <li><a href="#">Hubungi Kami</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Jaringan Media</h3>
-                <ul>
-                    <li><a href="#">Indonesia Update TV</a></li>
-                    <li><a href="#">Radio Update</a></li>
-                    <li><a href="#">Update Digital</a></li>
-                    <li><a href="#">Event Update</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Sosial Media</h3>
-                <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">YouTube</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; 2025 Indonesia Update. Seluruh hak cipta dilindungi.
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const lanjutBtn = document.getElementById('lanjutBtn');
-            const loginModal = document.getElementById('loginModal');
-            const submitBtn = document.getElementById('submitBtn');
-            const secretPage = document.getElementById('secretPage');
-            const mainContent = document.querySelector('.main-content');
-            const footer = document.querySelector('.footer');
-            const correctPassword = "0107387129";
-
-            lanjutBtn.addEventListener('click', function() {
-                loginModal.style.display = 'flex';
-            });
-
-            submitBtn.addEventListener('click', function() {
-                const password = document.getElementById('password').value;
-                
-                if (password === correctPassword) {
-                    // Show secret page
-                    loginModal.style.display = 'none';
-                    mainContent.style.display = 'none';
-                    footer.style.display = 'none';
-                    secretPage.style.display = 'block';
+                // Check regular captcha
+                if (userInput === captchaCode) {
+                    window.location.href = 'https://www.kompas.com';
                 } else {
-                    // Redirect to Kompas
-                    window.location.href = "https://www.kompas.com";
+                    setErrorMessage('Kode CAPTCHA salah. Coba lagi.');
+                    setCaptchaCode(generateRandomCode());
                 }
-            });
+            };
 
-            // Close modal when clicking outside
-            window.addEventListener('click', function(event) {
-                if (event.target === loginModal) {
-                    loginModal.style.display = 'none';
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+            if (showSecretPage) {
+                return (
+                    <div className="secret-page">
+                        <h1>Informasi penting disimpan di sini.</h1>
+                    </div>
+                );
+            }
+
+            return (
+                <>
+                    <header>
+                        <div className="top-header">
+                            <div className="container">
+                                <div className="date">Selasa, 22 April 2025</div>
+                                <div className="social-media">Ikuti Kami di Media Sosial</div>
+                            </div>
+                        </div>
+                        <div className="main-header">
+                            <div className="container">
+                                <div className="logo">
+                                    <img src="/api/placeholder/60/60" alt="Sehat Kita Logo" />
+                                    <div>
+                                        <h1>Sehat Kita</h1>
+                                        <div className="tagline">Portal Berita Kesehatan Terpercaya</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <nav>
+                            <div className="container">
+                                <ul>
+                                    <li><a href="#">Beranda</a></li>
+                                    <li><a href="#">Berita Terkini</a></li>
+                                    <li><a href="#">Nutrisi</a></li>
+                                    <li><a href="#">Fitness</a></li>
+                                    <li><a href="#">Mental Health</a></li>
+                                    <li><a href="#">Panduan Hidup Sehat</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </header>
+
+                    <main className="container">
+                        <div className="breadcrumb">
+                            <a href="#">Beranda</a> &gt; <a href="#">Nutrisi</a> &gt; Bahaya Terlalu Banyak Makan Gula
+                        </div>
+
+                        <article className="article">
+                            <div className="article-header">
+                                <h1>Bahaya Terlalu Banyak Makan Gula Bagi Kesehatan</h1>
+                                <div className="article-meta">
+                                    <span className="author">Oleh: dr. Anita Setiawan</span>
+                                    <span className="date">Dipublikasikan: 22 April 2025</span>
+                                    <span className="read-time">Waktu Baca: 8 menit</span>
+                                </div>
+                            </div>
+
+                            <div className="article-image"></div>
+
+                            <div className="article-content">
+                                <p>Di era modern ini, konsumsi gula telah menjadi bagian yang tidak terpisahkan dari pola makan sehari-hari. Dari makanan kemasan hingga minuman manis yang sering kita nikmati, gula hadir dalam berbagai bentuk dan jumlah yang seringkali tidak kita sadari. Meskipun rasanya yang manis memberikan kenikmatan sementara, konsumsi gula berlebihan dapat menimbulkan berbagai risiko kesehatan jangka panjang yang serius.</p>
+
+                                <p>Organisasi Kesehatan Dunia (WHO) merekomendasikan konsumsi gula tidak melebihi 5% dari total asupan kalori harian, atau sekitar 25 gram (6 sendok teh) untuk orang dewasa dengan diet 2000 kalori. Sayangnya, rata-rata konsumsi gula masyarakat modern jauh melebihi angka tersebut, dengan konsumsi rata-rata mencapai 70-100 gram per hari di banyak negara berkembang.</p>
+
+                                <div className="highlight-box">
+                                    "Konsumsi gula berlebihan adalah salah satu faktor risiko utama berbagai penyakit kronis yang dapat dicegah. Mengurangi asupan gula adalah langkah penting menuju gaya hidup yang lebih sehat." - dr. Anita Setiawan, Sp.GK
+                                </div>
+
+                                <h2>Dampak Gula Berlebihan Terhadap Kesehatan</h2>
+
+                                <h3>1. Obesitas dan Kenaikan Berat Badan</h3>
+                                <p>Konsumsi gula berlebihan, terutama dalam bentuk minuman manis, memiliki hubungan erat dengan epidemi obesitas global. Gula mengandung kalori kosong yang tidak memberikan nutrisi penting bagi tubuh. Ketika dikonsumsi dalam jumlah besar, kelebihan kalori tersebut akan disimpan sebagai lemak tubuh. Studi menunjukkan bahwa orang yang rutin mengonsumsi minuman manis memiliki risiko 60% lebih tinggi mengalami obesitas, terlepas dari faktor gaya hidup lainnya.</p>
+
+                                <h3>2. Penyakit Diabetes Tipe 2</h3>
+                                <p>Konsumsi gula berlebihan dalam jangka panjang dapat menyebabkan resistensi insulin, suatu kondisi di mana sel-sel tubuh tidak merespons insulin secara efektif. Insulin adalah hormon yang mengatur kadar glukosa darah. Ketika tubuh menjadi resisten terhadap insulin, kadar gula darah meningkat, yang dapat berkembang menjadi diabetes tipe 2. Penelitian menunjukkan bahwa orang yang mengonsumsi 1-2 kaleng minuman manis setiap hari memiliki risiko 26% lebih tinggi mengembangkan diabetes tipe 2.</p>
+
+                                <h3>3. Penyakit Jantung dan Pembuluh Darah</h3>
+                                <p>Diet tinggi gula dikaitkan dengan peningkatan risiko penyakit jantung dan pembuluh darah. Konsumsi gula berlebihan dapat meningkatkan kadar trigliserida dan LDL (kolesterol jahat) dalam darah, serta menurunkan kadar HDL (kolesterol baik). Kombinasi ini meningkatkan risiko aterosklerosis, yaitu penumpukan plak di arteri yang dapat menyebabkan serangan jantung dan stroke.</p>
+
+                                <p>Selain itu, konsumsi gula berlebihan juga dikaitkan dengan peningkatan tekanan darah, yang merupakan faktor risiko utama penyakit kardiovaskular. Studi jangka panjang menunjukkan bahwa orang yang mengonsumsi 25% atau lebih kalori harian dari gula tambahan memiliki risiko dua kali lipat meninggal akibat penyakit jantung dibandingkan dengan mereka yang mengonsumsi kurang dari 10%.</p>
+
+                                <h3>4. Kerusakan Hati</h3>
+                                <p>Konsumsi fruktosa berlebihan, yang banyak terdapat dalam sirup jagung tinggi fruktosa dan gula tambahan lainnya, dapat menyebabkan penumpukan lemak di hati. Kondisi ini dikenal sebagai penyakit perlemakan hati non-alkoholik (NAFLD), yang dapat berkembang menjadi peradangan hati, fibrosis, dan bahkan sirosis. Studi menunjukkan bahwa orang yang rutin mengonsumsi minuman manis memiliki risiko lebih tinggi mengembangkan NAFLD dibandingkan dengan mereka yang jarang mengonsumsinya.</p>
+
+                                <h3>5. Masalah Kesehatan Gigi</h3>
+                                <p>Gula adalah makanan utama bagi bakteri yang menyebabkan kerusakan gigi. Ketika gula dan karbohidrat olahan lainnya dimakan, bakteri di mulut menghasilkan asam yang menyerang email gigi. Konsumsi gula berlebihan, terutama dalam bentuk makanan dan minuman yang lengket atau dinikmati sepanjang hari, sangat meningkatkan risiko karies gigi. Penelitian menunjukkan bahwa anak-anak yang mengonsumsi 3 atau lebih makanan manis per hari memiliki prevalensi karies yang jauh lebih tinggi.</p>
+
+                                <h3>6. Penuaan Kulit Dini</h3>
+                                <p>Diet tinggi gula dapat mempercepat proses penuaan kulit melalui proses yang disebut glikasi. Glikasi terjadi ketika molekul gula berikatan dengan protein dalam tubuh, membentuk produk akhir glikasi lanjut (AGEs). AGEs merusak kolagen dan elastin, protein yang menjaga kulit tetap kencang dan elastis. Akibatnya, kulit menjadi lebih cepat keriput dan kehilangan kekenyalannya. Penelitian dermatologi menunjukkan bahwa orang dengan diet tinggi gula cenderung memiliki tanda-tanda penuaan kulit yang lebih jelas dibandingkan dengan mereka yang mengonsumsi lebih sedikit gula.</p>
+
+                                <h2>Jenis Gula yang Perlu Diwaspadai</h2>
+
+                                <p>Gula hadir dalam berbagai bentuk dan nama dalam produk makanan. Beberapa jenis gula yang umum ditemukan dalam makanan olahan meliputi:</p>
+
+                                <ul>
+                                    <li><strong>Sukrosa:</strong> Gula meja biasa yang berasal dari tebu atau bit gula</li>
+                                    <li><strong>Fruktosa:</strong> Gula alami yang ditemukan dalam buah-buahan</li>
+                                    <li><strong>Glukosa:</strong> Gula sederhana yang merupakan sumber energi utama tubuh</li>
+                                    <li><strong>Laktosa:</strong> Gula alami yang ditemukan dalam susu</li>
+                                    <li><strong>Maltosa:</strong> Gula yang dihasilkan dari pemecahan pati</li>
+                                    <li><strong>Sirup jagung tinggi fruktosa:</strong> Pemanis buatan yang umum digunakan dalam makanan dan minuman olahan</li>
+                                    <li><strong>Madu:</strong> Meskipun alami, tetap mengandung gula dalam jumlah tinggi</li>
+                                    <li><strong>Sirup maple:</strong> Pemanis alami dari getah pohon maple</li>
+                                    <li><strong>Molase:</strong> Produk sampingan dari pembuatan gula</li>
+                                </ul>
+
+                                <h2>Cara Mengurangi Konsumsi Gula</h2>
+
+                                <p>Mengurangi konsumsi gula membutuhkan kesadaran dan usaha yang konsisten. Berikut beberapa strategi yang dapat membantu:</p>
+
+                                <ul>
+                                    <li><strong>Baca label makanan:</strong> Periksa daftar bahan dan informasi nilai gizi untuk mengetahui kandungan gula dalam produk</li>
+                                    <li><strong>Kurangi minuman manis:</strong> Minuman bersoda, jus buah kemasan, dan minuman energi sering mengandung gula dalam jumlah sangat tinggi</li>
+                                    <li><strong>Pilih makanan alami:</strong> Konsumsi lebih banyak buah-buahan, sayuran, biji-bijian utuh, dan protein tanpa tambahan gula</li>
+                                    <li><strong>Masak di rumah:</strong> Dengan memasak sendiri, Anda dapat mengontrol jumlah gula yang ditambahkan</li>
+                                    <li><strong>Coba alternatif pemanis:</strong> Gunakan buah-buahan matang atau rempah-rempah seperti kayu manis untuk menambah rasa manis alami</li>
+                                    <li><strong>Kurangi secara bertahap:</strong> Mengurangi gula secara perlahan dapat membantu lidah Anda beradaptasi dengan tingkat kemanisan yang lebih rendah</li>
+                                </ul>
+
+                                <div className="highlight-box">
+                                    "Kunci untuk mengurangi konsumsi gula adalah kesadaran. Mulailah dengan memperhatikan berapa banyak gula yang Anda konsumsi setiap hari, lalu tetapkan target realistis untuk menguranginya secara bertahap." - Tim Nutrisi Sehat Kita
+                                </div>
+
+                                <h2>Kesimpulan</h2>
+
+                                <p>Meskipun gula merupakan sumber energi instan bagi tubuh, konsumsi berlebihan dapat menimbulkan berbagai masalah kesehatan serius. Dengan meningkatkan kesadaran tentang kandungan gula dalam makanan dan minuman yang kita konsumsi, serta mengambil langkah-langkah untuk menguranginya, kita dapat melindungi kesehatan jangka panjang dan meningkatkan kualitas hidup secara keseluruhan. Ingatlah bahwa perubahan kecil namun konsisten dalam pola makan dapat memberikan dampak besar bagi kesehatan Anda.</p>
+
+                                <p>Konsultasikan dengan profesional kesehatan atau ahli gizi terdaftar untuk mendapatkan saran yang disesuaikan dengan kebutuhan dan kondisi kesehatan Anda secara spesifik. Dengan pendekatan yang tepat, mengurangi konsumsi gula dapat menjadi langkah awal yang penting menuju gaya hidup yang lebih sehat dan bebas dari penyakit kronis.</p>
+                            </div>
+                        </article>
+
+                        <section className="related-articles">
+                            <h3>Artikel Terkait</h3>
+                            <div className="related-grid">
+                                <div className="related-card">
+                                    <div className="related-image" style={{backgroundImage: "url('/api/placeholder/400/250')"}}></div>
+                                    <div className="related-content">
+                                        <h4><a href="#">7 Alternatif Gula yang Lebih Sehat untuk Dicoba</a></h4>
+                                        <div className="related-meta">15 April 2025 | Nutrisi</div>
+                                    </div>
+                                </div>
+                                <div className="related-card">
+                                    <div className="related-image" style={{backgroundImage: "url('/api/placeholder/400/250')"}}></div>
+                                    <div className="related-content">
+                                        <h4><a href="#">Cara Mengatasi Kecanduan Gula dalam 30 Hari</a></h4>
+                                        <div className="related-meta">10 April 2025 | Psikologi</div>
+                                    </div>
+                                </div>
+                                <div className="related-card">
+                                    <div className="related-image" style={{backgroundImage: "url('/api/placeholder/400/250')"}}></div>
+                                    <div className="related-content">
+                                        <h4><a href="#">Mitos dan Fakta Seputar Gula dan Diabetes</a></h4>
+                                        <div className="related-meta">5 April 2025 | Kesehatan</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+
+                    <footer>
+                        <div className="container">
+                            <div className="footer-content">
+                                <div className="footer-column">
+                                    <h3>Sehat Kita</h3>
+                                    <p>Portal berita kesehatan terpercaya dengan informasi terkini tentang nutrisi, fitness, dan gaya hidup sehat.</p>
+                                </div>
+                                <div className="footer-column">
+                                    <h3>Kategori</h3>
+                                    <ul>
+                                        <li><a href="#">Berita Terkini</a></li>
+                                        <li><a href="#">Nutrisi</a></li>
+                                        <li><a href="#">Fitness</a></li>
+                                        <li><a href="#">Mental Health</a></li>
+                                        <li><a href="#">Panduan Hidup Sehat</a></li>
+                                    </ul>
+                                </div>
+                                <div className="footer-column">
+                                    <h3>Pusat Informasi</h3>
+                                    <ul>
+                                        <li><a href="#">Tentang Kami</a></li>
+                                        <li><a href="#">Tim Redaksi</a></li>
+                                        <li><a href="#">Karir</a></li>
+                                        <li><a href="#">Kebijakan Privasi</a></li>
+                                        <li><a href="#">Syarat dan Ketentuan</a></li>
+                                    </ul>
+                                </div>
+                                <div className="footer-column">
+                                    <h3>Kontak</h3>
+                                    <ul>
+                                        <li>Gedung Sehat, Jl. Kesehatan No. 123</li>
+                                        <li>Jakarta Selatan, Indonesia</li>
+                                        <li>Email: info@sehatkita.com</li>
+                                        <li>Telp: (021) 1234-5678</li>
+                                        <li>
+                                            <button className="contact-
