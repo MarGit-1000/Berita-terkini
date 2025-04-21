@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berita Terkini - Indonesia Update</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #1a2c5b;
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .top-news {
+            margin-bottom: 30px;
+        }
+        .top-news img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .headline {
+            font-size: 32px;
+            margin: 15px 0;
+            color: #1a2c5b;
+        }
+        .subheadline {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .article {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .article p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #333;
+        }
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .news-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .news-card-content {
+            padding: 15px;
+        }
+        .news-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #1a2c5b;
+        }
+        .news-card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .time {
+            font-size: 12px;
+            color: #999;
+        }
+        .kategori {
+            color: #1a2c5b;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #1a2c5b;
+            font-size: 24px;
+        }
+        .continue-btn-container {
+            text-align: center;
+            padding: 20px 0 40px;
+        }
+        .continue-btn {
+            font-size: 12px;
+            padding: 5px 10px;
+            background-color: #1a2c5b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 100%;
+        }
+        .modal h2 {
+            margin-bottom: 20px;
+            color: #1a2c5b;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .submit-btn {
+            padding: 10px 20px;
+            background-color: #1a2c5b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .footer {
+            background-color: #1a2c5b;
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .footer-section ul {
+            list-style: none;
+        }
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 12px;
+            color: #ddd;
+        }
+        .secret-page {
+            display: none;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .secret-page h1 {
+            color: #1a2c5b;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .gallery-image {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">Indonesia Update</a>
+            <nav>
+                <ul>
+                    <li><a href="#">Beranda</a></li>
+                    <li><a href="#">Politik</a></li>
+                    <li><a href="#">Ekonomi</a></li>
+                    <li><a href="#">Olahraga</a></li>
+                    <li><a href="#">Teknologi</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="top-news">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqsjor2l0yAZgJRA0agukH1hMvFVR85sp3J6uBhAJaTRtQCLmGHG_YW5Q&s=10" alt="Berita Utama">
+            <h1 class="headline">Pemerintah Luncurkan Program Pembangunan Infrastruktur Baru di Indonesia Timur</h1>
+            <p class="subheadline">Program senilai triliunan rupiah ini bertujuan untuk mengurangi kesenjangan ekonomi antara Indonesia Barat dan Timur melalui pembangunan pelabuhan, bandara, dan jalan raya.</p>
+            <div class="article">
+                <p>Jakarta, 21 April 2025 - Pemerintah Indonesia hari ini secara resmi meluncurkan program pembangunan infrastruktur berskala besar yang ditargetkan untuk wilayah Indonesia Timur. Program yang diberi nama "Pemerataan Pembangunan Nusantara" ini akan berlangsung selama lima tahun ke depan dengan anggaran awal sebesar Rp 500 triliun.</p>
+                
+                <p>Menteri Koordinator Bidang Perekonomian, Dr. Ahmad Santoso, menjelaskan bahwa program ini merupakan upaya strategis pemerintah untuk mengurangi kesenjangan ekonomi yang telah lama terjadi antara kawasan barat dan timur Indonesia. "Selama ini pembangunan terlalu terpusat di Jawa dan Sumatera. Saatnya kita memberikan perhatian lebih kepada saudara-saudara kita di timur," ujarnya dalam konferensi pers di Istana Negara.</p>
+                
+                <p>Program ini akan mencakup pembangunan lima pelabuhan baru, tiga bandara internasional, jaringan jalan sepanjang 2.500 kilometer, serta peningkatan kapasitas listrik sebesar 2.000 megawatt. Wilayah yang menjadi fokus utama meliputi Provinsi Papua, Papua Barat, Maluku, Maluku Utara, serta Nusa Tenggara Timur.</p>
+                
+                <p>Presiden menekankan bahwa proyek ini tidak hanya sekadar pembangunan fisik, tetapi juga melibatkan transfer teknologi dan peningkatan kapasitas sumber daya manusia lokal. "Kita tidak hanya membangun infrastruktur, tetapi juga membangun manusianya. Kita ingin masyarakat lokal bisa terlibat aktif dan merasakan manfaat langsung dari pembangunan ini," kata Presiden.</p>
+                
+                <p>Menteri Keuangan, Dra. Siti Rahayu, menambahkan bahwa pendanaan proyek akan berasal dari APBN, kerja sama pemerintah dengan badan usaha (KPBU), serta pinjaman dari lembaga keuangan internasional. "Kami telah melakukan perhitungan yang matang untuk memastikan keberlanjutan fiskal. Program ini tidak akan membebani keuangan negara dalam jangka panjang," jelasnya.</p>
+                
+                <p>Respons positif datang dari berbagai kalangan, termasuk dari para gubernur di wilayah Indonesia Timur. Gubernur Papua, John Wempi, menyambut baik program tersebut dan berharap implementasinya dapat berjalan sesuai rencana. "Ini adalah kabar gembira bagi masyarakat Papua. Kami siap mendukung penuh program ini dan memastikan pelaksanaannya tepat sasaran," ujarnya.</p>
+                
+                <p>Namun, beberapa pengamat ekonomi menyoroti pentingnya transparansi dan pengawasan ketat dalam pelaksanaan program. "Program sebesar ini rentan terhadap penyelewengan. Pemerintah harus memastikan adanya mekanisme pengawasan yang kuat," kata ekonom dari Universitas Indonesia, Prof. Dr. Bambang Widjaja.</p>
+                
+                <p>Tahap pertama program ini akan dimulai bulan depan, dengan groundbreaking proyek pelabuhan di Sorong, Papua Barat. Pemerintah menargetkan 30% dari keseluruhan proyek dapat diselesaikan dalam dua tahun pertama.</p>
+            </div>
+        </div>
+
+        <h2 class="kategori">Berita Terkini</h2>
+        
+        <div class="news-grid">
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Politik">
+                <div class="news-card-content">
+                    <h3>DPR Sahkan RUU Perlindungan Data Pribadi</h3>
+                    <p>Undang-undang baru tentang perlindungan data pribadi akhirnya disahkan setelah pembahasan selama tiga tahun.</p>
+                    <span class="time">2 jam lalu</span>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Ekonomi">
+                <div class="news-card-content">
+                    <h3>Inflasi Turun ke Level 3,2%, Ekonom Optimis</h3>
+                    <p>Bank Indonesia melaporkan penurunan angka inflasi yang signifikan sejak awal tahun ini.</p>
+                    <span class="time">4 jam lalu</span>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Teknologi">
+                <div class="news-card-content">
+                    <h3>Indonesia Luncurkan Satelit Komunikasi Terbaru</h3>
+                    <p>Satelit Nusantara-1 berhasil diluncurkan dari pangkalan luar angkasa di Kazakhstan.</p>
+                    <span class="time">5 jam lalu</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="kategori">Politik</h2>
+        
+        <div class="news-grid">
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Politik">
+                <div class="news-card-content">
+                    <h3>Koalisi Partai Besar Bentuk Poros Baru</h3>
+                    <p>Tiga partai politik dengan suara terbanyak di parlemen mengumumkan pembentukan koalisi baru.</p>
+                    <span class="time">8 jam lalu</span>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Politik">
+                <div class="news-card-content">
+                    <h3>Menteri Luar Negeri Kunjungi Lima Negara ASEAN</h3>
+                    <p>Kunjungan diplomatik ini bertujuan memperkuat kerja sama regional dalam menghadapi tantangan global.</p>
+                    <span class="time">10 jam lalu</span>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Politik">
+                <div class="news-card-content">
+                    <h3>KPK Tetapkan Tersangka Baru Kasus Korupsi Infrastruktur</h3>
+                    <p>Dua pejabat tinggi kementerian dan satu pengusaha ditetapkan sebagai tersangka dalam kasus megaproyek.</p>
+                    <span class="time">12 jam lalu</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="kategori">Ekonomi & Bisnis</h2>
+        
+        <div class="news-grid">
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Ekonomi">
+                <div class="news-card-content">
+                    <h3>Rupiah Menguat ke Level Rp 14.200 per Dolar AS</h3>
+                    <p>Penguatan rupiah didukung oleh membaiknya fundamental ekonomi dan arus modal asing yang masuk.</p>
+                    <span class="time">6 jam lalu</span>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Ekonomi">
+                <div class="news-card-content">
+                    <h3>Bursa Saham Indonesia Cetak Rekor Tertinggi Baru</h3>
+                    <p>IHSG menembus level 7.500 untuk pertama kalinya dalam sejarah pasar modal Indonesia.</p>
+                    <span class="time">9 jam lalu</span>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Ekonomi">
+                <div class="news-card-content">
+                    <h3>Startup Fintech Lokal Dapatkan Pendanaan Rp 2 Triliun</h3>
+                    <p>Pendanaan seri C ini menjadikan perusahaan fintech tersebut sebagai unicorn terbaru dari Indonesia.</p>
+                    <span class="time">11 jam lalu</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="kategori">Olahraga</h2>
+        
+        <div class="news-grid">
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Olahraga">
+                <div class="news-card-content">
+                    <h3>Timnas Indonesia Kalahkan Thailand 3-1</h3>
+                    <p>Kemenangan ini mengantarkan Timnas melaju ke semifinal Piala AFF 2025.</p>
+                    <span class="time">5 jam lalu</span>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Olahraga">
+                <div class="news-card-content">
+                    <h3>Atlet Lari Indonesia Pecahkan Rekor Asia</h3>
+                    <p>Lalu Muhammad Zohri mencetak waktu 9,90 detik untuk lari 100 meter di kejuaraan Asia.</p>
+                    <span class="time">8 jam lalu</span>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Olahraga">
+                <div class="news-card-content">
+                    <h3>Liga Indonesia Akan Gunakan VAR di Semua Pertandingan</h3>
+                    <p>PSSI mengumumkan penggunaan teknologi VAR untuk semua pertandingan Liga 1 mulai musim depan.</p>
+                    <span class="time">10 jam lalu</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="kategori">Teknologi</h2>
+        
+        <div class="news-grid">
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Teknologi">
+                <div class="news-card-content">
+                    <h3>Indonesia Resmikan Pusat Data Nasional di Jogyakarta</h3>
+                    <p>Pusat data berkapasitas besar ini akan mendukung transformasi digital pemerintahan.</p>
+                    <span class="time">7 jam lalu</span>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Teknologi">
+                <div class="news-card-content">
+                    <h3>Aplikasi Transportasi Lokal Hadirkan Fitur Keselamatan Baru</h3>
+                    <p>Fitur "Perjalanan Aman" memungkinkan pengguna berbagi lokasi real-time dengan kontak darurat.</p>
+                    <span class="time">9 jam lalu</span>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Teknologi">
+                <div class="news-card-content">
+                    <h3>Peneliti Indonesia Kembangkan Robot Pendeteksi Bencana</h3>
+                    <p>Robot ciptaan tim ITB ini mampu menjelajah area bencana yang sulit diakses manusia.</p>
+                    <span class="time">13 jam lalu</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="kategori">Gaya Hidup</h2>
+        
+        <div class="news-grid">
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Gaya Hidup">
+                <div class="news-card-content">
+                    <h3>Tren Kuliner 2025: Makanan Fusion Nusantara</h3>
+                    <p>Para chef Indonesia mempopulerkan kombinasi makanan tradisional dengan teknik memasak modern.</p>
+                    <span class="time">6 jam lalu</span>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Gaya Hidup">
+                <div class="news-card-content">
+                    <h3>Festival Film Indonesia Akan Digelar di 10 Kota</h3>
+                    <p>Festival tahunan ini akan menampilkan lebih dari 100 film karya sineas Indonesia.</p>
+                    <span class="time">11 jam lalu</span>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <img src="/api/placeholder/400/200" alt="Berita Gaya Hidup">
+                <div class="news-card-content">
+                    <h3>Desainer Muda Indonesia Pamerkan Karya di Paris Fashion Week</h3>
+                    <p>Koleksi berbahan dasar tenun nusantara mendapat apresiasi dari kritikus mode internasional.</p>
+                    <span class="time">14 jam lalu</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="continue-btn-container">
+            <button class="continue-btn" id="lanjutBtn">Lanjut</button>
+        </div>
+    </div>
+
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <h2>Verifikasi bahwa anda manusia dengan menuliskan Ovei sebagai nama dan 194jsm sebagai password</h2>
+            <div class="input-group">
+                <label for="username">Nama Pengguna:</label>
+                <input type="text" id="username" placeholder="Masukkan nama pengguna">
+            </div>
+            <div class="input-group">
+                <label for="password">Kata Sandi:</label>
+                <input type="password" id="password" placeholder="Masukkan kata sandi">
+            </div>
+            <button class="submit-btn" id="submitBtn">Masuk</button>
+        </div>
+    </div>
+
+    <div class="secret-page" id="secretPage">
+        <h1>Halaman Rahasia</h1>
+        <div class="image-gallery">
+            <img src="/api/placeholder/600/400" alt="Informasi Rahasia 1" class="gallery-image">
+            <img src="/api/placeholder/600/400" alt="Informasi Rahasia 2" class="gallery-image">
+            <img src="/api/placeholder/600/400" alt="Informasi Rahasia 3" class="gallery-image">
+            <img src="/api/placeholder/600/400" alt="Informasi Rahasia 4" class="gallery-image">
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Tentang Kami</h3>
+                <ul>
+                    <li><a href="#">Profil Perusahaan</a></li>
+                    <li><a href="#">Redaksi</a></li>
+                    <li><a href="#">Pedoman Media</a></li>
+                    <li><a href="#">Karir</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Layanan</h3>
+                <ul>
+                    <li><a href="#">Langganan Berita</a></li>
+                    <li><a href="#">Pasang Iklan</a></li>
+                    <li><a href="#">Kerjasama Media</a></li>
+                    <li><a href="#">Hubungi Kami</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Jaringan Media</h3>
+                <ul>
+                    <li><a href="#">Indonesia Update TV</a></li>
+                    <li><a href="#">Radio Update</a></li>
+                    <li><a href="#">Update Digital</a></li>
+                    <li><a href="#">Event Update</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Sosial Media</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Indonesia Update. Seluruh hak cipta dilindungi.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const lanjutBtn = document.getElementById('lanjutBtn');
+            const loginModal = document.getElementById('loginModal');
+            const submitBtn = document.getElementById('submitBtn');
+            const secretPage = document.getElementById('secretPage');
+            const mainContent = document.querySelector('.main-content');
+            const footer = document.querySelector('.footer');
+            const correctPassword = "0107387129";
+
+            lanjutBtn.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+            });
+
+            submitBtn.addEventListener('click', function() {
+                const password = document.getElementById('password').value;
+                
+                if (password === correctPassword) {
+                    // Show secret page
+                    loginModal.style.display = 'none';
+                    mainContent.style.display = 'none';
+                    footer.style.display = 'none';
+                    secretPage.style.display = 'block';
+                } else {
+                    // Redirect to Kompas
+                    window.location.href = "https://www.kompas.com";
+                }
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
