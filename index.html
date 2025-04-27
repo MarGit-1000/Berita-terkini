@@ -2,680 +2,104 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sehat Kita - Portal Berita Kesehatan Terpercaya</title>
+    <title>Prank Klik Saya</title>
     <style>
-        :root {
-            --primary-color: #0088cc;
-            --secondary-color: #e8f4f8;
-            --accent-color: #ff6b6b;
-            --text-color: #333;
-            --light-gray: #f5f5f5;
-            --medium-gray: #ddd;
-            --dark-gray: #666;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-
         body {
-            color: var(--text-color);
-            line-height: 1.6;
-            background-color: #f9f9f9;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .top-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 10px 0;
-            font-size: 0.9rem;
-        }
-
-        .top-header .container {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .main-header {
-            padding: 20px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo img {
-            height: 60px;
-        }
-
-        .logo h1 {
-            font-size: 32px;
-            color: var(--primary-color);
-            margin: 0;
-        }
-
-        .tagline {
-            color: var(--dark-gray);
-            font-style: italic;
-            font-size: 16px;
-        }
-
-        nav {
-            background-color: var(--secondary-color);
-            padding: 15px 0;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        nav a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 5px 0;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-        }
-
-        /* Main Content */
-        main {
-            padding: 40px 0;
-        }
-
-        .breadcrumb {
-            color: var(--dark-gray);
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumb a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .article {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            overflow: hidden;
-        }
-
-        .article-header {
-            padding: 30px;
-            background-color: var(--secondary-color);
-        }
-
-        .article-header h1 {
-            font-size: 36px;
-            margin-bottom: 15px;
-            color: var(--text-color);
-        }
-
-        .article-meta {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            color: var(--dark-gray);
-            font-size: 0.9rem;
-        }
-
-        .article-meta .author {
-            font-weight: 600;
-        }
-
-        .article-image {
-            width: 100%;
-            height: 400px;
-            background-image: url('/api/placeholder/1200/400');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .article-content {
-            padding: 30px;
-        }
-
-        .article-content p, .article-content ul, .article-content h2, .article-content h3 {
-            margin-bottom: 20px;
-        }
-
-        .article-content h2 {
-            font-size: 28px;
-            margin-top: 40px;
-            color: var(--primary-color);
-        }
-
-        .article-content h3 {
-            font-size: 22px;
-            margin-top: 30px;
-            color: var(--text-color);
-        }
-
-        .article-content ul {
-            padding-left: 20px;
-        }
-
-        .article-content li {
-            margin-bottom: 10px;
-        }
-
-        .highlight-box {
-            background-color: var(--secondary-color);
-            border-left: 4px solid var(--primary-color);
-            padding: 20px;
-            margin: 30px 0;
-            font-style: italic;
-        }
-
-        .related-articles {
-            margin-top: 50px;
-        }
-
-        .related-articles h3 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: var(--primary-color);
-        }
-
-        .related-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .related-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-
-        .related-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .related-image {
-            height: 180px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .related-content {
-            padding: 15px;
-        }
-
-        .related-content h4 {
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-
-        .related-content a {
-            color: var(--text-color);
-            text-decoration: none;
-        }
-
-        .related-content a:hover {
-            color: var(--primary-color);
-        }
-
-        .related-meta {
-            color: var(--dark-gray);
-            font-size: 0.8rem;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--secondary-color);
-            padding: 50px 0 30px;
-            margin-top: 60px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-        }
-
-        .footer-column h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 20px;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column li {
-            margin-bottom: 10px;
-        }
-
-        .footer-column a {
-            color: var(--text-color);
-            text-decoration: none;
-        }
-
-        .footer-column a:hover {
-            color: var(--primary-color);
-        }
-
-        .copyright {
-            margin-top: 40px;
-            text-align: center;
-            color: var(--dark-gray);
-            padding-top: 20px;
-            border-top: 1px solid var(--medium-gray);
-        }
-
-        .contact-btn {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
-            font-size: 16px;
-            padding: 0;
-            text-align: left;
-            font-weight: normal;
-            appearance: none;
-        }
-
-        .contact-btn:hover {
-            color: var(--primary-color);
-        }
-
-        /* Modal */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-        }
-
-        .modal h2 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .captcha-box {
-            background-color: var(--light-gray);
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-            font-size: 20px;
-            letter-spacing: 3px;
-            font-weight: bold;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--medium-gray);
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        .form-button {
-            background-color: var(--primary-color);
+            height: 100vh;
+            flex-direction: column;
+            background-color: #222;
             color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: background-color 0.3s;
+            font-family: Arial, sans-serif;
         }
-
-        .form-button:hover {
-            background-color: #006699;
-        }
-
-        .error-message {
-            color: var(--accent-color);
-            margin-top: 10px;
-        }
-
-        .secret-page {
-            padding: 50px;
-            text-align: center;
+        button {
+            padding: 20px 40px;
             font-size: 24px;
-            display: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff4757;
+            color: white;
+            transition: background 0.3s;
         }
-
-        @media (max-width: 768px) {
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .related-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .article-header h1 {
-                font-size: 28px;
-            }
+        button:hover {
+            background-color: #ff6b81;
         }
-
-        @media (max-width: 576px) {
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-
-            .related-grid {
-                grid-template-columns: 1fr;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 10px;
-            }
+        #preview {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 1s ease;
+            max-width: 80%;
+            border: 5px solid white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px white;
         }
     </style>
 </head>
 <body>
-    <div id="root"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <h1>Tekan Tombol Ini!</h1>
+    <button onclick="startPrank()">Klik Saya!</button>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
+    <video id="video" style="display:none;" autoplay></video>
+    <canvas id="canvas" style="display:none;"></canvas>
+    <img id="preview" src="">
 
-        function generateRandomCode() {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
-            for (let i = 0; i < 6; i++) {
-                result += characters.charAt(Math.floor(Math.random() * characters.length));
+    <script>
+        async function startPrank() {
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const preview = document.getElementById('preview');
+            
+            // Minta izin kamera
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+
+                // Tunggu 0.5 detik buat pastiin kamera nyala
+                setTimeout(() => {
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                    // Berhentiin kamera
+                    stream.getTracks().forEach(track => track.stop());
+
+                    // Ambil foto dari canvas
+                    const dataURL = canvas.toDataURL('image/png');
+                    preview.src = dataURL;
+
+                    // Animasi zoom in
+                    preview.style.transform = 'translate(-50%, -50%) scale(1)';
+
+                    // Setelah animasi, kecil dan geser ke samping
+                    setTimeout(() => {
+                        preview.style.transition = 'transform 1s ease';
+                        preview.style.transform = 'translate(150%, -150%) scale(0.2)';
+                    }, 1000);
+
+                    // Lalu auto download
+                    setTimeout(() => {
+                        const a = document.createElement('a');
+                        a.href = dataURL;
+                        a.download = 'muka_aneh.png';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    }, 2000);
+
+                }, 500);
+            } catch (err) {
+                alert('Gagal mengakses kamera! Coba izinkan kamera dulu.');
+                console.error(err);
             }
-            return result;
         }
+    </script>
 
-        function App() {
-            const [showModal, setShowModal] = useState(false);
-            const [captchaCode, setCaptchaCode] = useState('');
-            const [userInput, setUserInput] = useState('');
-            const [errorMessage, setErrorMessage] = useState('');
-            const [showSecretPage, setShowSecretPage] = useState(false);
-            const secretCode = '0107387129';
-
-            useEffect(() => {
-                if (showModal) {
-                    setCaptchaCode(generateRandomCode());
-                }
-            }, [showModal]);
-
-            const handleContactClick = () => {
-                setShowModal(true);
-                setUserInput('');
-                setErrorMessage('');
-            };
-
-            const handleCaptchaSubmit = (e) => {
-                e.preventDefault();
-                
-                // Check for secret code
-                if (userInput === secretCode) {
-                    setShowModal(false);
-                    setShowSecretPage(true);
-                    return;
-                }
-                
-                // Check regular captcha
-                if (userInput === captchaCode) {
-                    window.location.href = 'https://www.kompas.com';
-                } else {
-                    setErrorMessage('Kode CAPTCHA salah. Coba lagi.');
-                    setCaptchaCode(generateRandomCode());
-                }
-            };
-
-            if (showSecretPage) {
-                return (
-                    <div className="secret-page">
-                        <h1>Informasi penting disimpan di sini.</h1>
-                    </div>
-                );
-            }
-
-            return (
-                <>
-                    <header>
-                        <div className="top-header">
-                            <div className="container">
-                                <div className="date">Selasa, 22 April 2025</div>
-                                <div className="social-media">Ikuti Kami di Media Sosial</div>
-                            </div>
-                        </div>
-                        <div className="main-header">
-                            <div className="container">
-                                <div className="logo">
-                                    <img src="/api/placeholder/60/60" alt="Sehat Kita Logo" />
-                                    <div>
-                                        <h1>Sehat Kita</h1>
-                                        <div className="tagline">Portal Berita Kesehatan Terpercaya</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <nav>
-                            <div className="container">
-                                <ul>
-                                    <li><a href="#">Beranda</a></li>
-                                    <li><a href="#">Berita Terkini</a></li>
-                                    <li><a href="#">Nutrisi</a></li>
-                                    <li><a href="#">Fitness</a></li>
-                                    <li><a href="#">Mental Health</a></li>
-                                    <li><a href="#">Panduan Hidup Sehat</a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </header>
-
-                    <main className="container">
-                        <div className="breadcrumb">
-                            <a href="#">Beranda</a> &gt; <a href="#">Nutrisi</a> &gt; Bahaya Terlalu Banyak Makan Gula
-                        </div>
-
-                        <article className="article">
-                            <div className="article-header">
-                                <h1>Bahaya Terlalu Banyak Makan Gula Bagi Kesehatan</h1>
-                                <div className="article-meta">
-                                    <span className="author">Oleh: dr. Anita Setiawan</span>
-                                    <span className="date">Dipublikasikan: 22 April 2025</span>
-                                    <span className="read-time">Waktu Baca: 8 menit</span>
-                                </div>
-                            </div>
-
-                            <div className="article-image"></div>
-
-                            <div className="article-content">
-                                <p>Di era modern ini, konsumsi gula telah menjadi bagian yang tidak terpisahkan dari pola makan sehari-hari. Dari makanan kemasan hingga minuman manis yang sering kita nikmati, gula hadir dalam berbagai bentuk dan jumlah yang seringkali tidak kita sadari. Meskipun rasanya yang manis memberikan kenikmatan sementara, konsumsi gula berlebihan dapat menimbulkan berbagai risiko kesehatan jangka panjang yang serius.</p>
-
-                                <p>Organisasi Kesehatan Dunia (WHO) merekomendasikan konsumsi gula tidak melebihi 5% dari total asupan kalori harian, atau sekitar 25 gram (6 sendok teh) untuk orang dewasa dengan diet 2000 kalori. Sayangnya, rata-rata konsumsi gula masyarakat modern jauh melebihi angka tersebut, dengan konsumsi rata-rata mencapai 70-100 gram per hari di banyak negara berkembang.</p>
-
-                                <div className="highlight-box">
-                                    "Konsumsi gula berlebihan adalah salah satu faktor risiko utama berbagai penyakit kronis yang dapat dicegah. Mengurangi asupan gula adalah langkah penting menuju gaya hidup yang lebih sehat." - dr. Anita Setiawan, Sp.GK
-                                </div>
-
-                                <h2>Dampak Gula Berlebihan Terhadap Kesehatan</h2>
-
-                                <h3>1. Obesitas dan Kenaikan Berat Badan</h3>
-                                <p>Konsumsi gula berlebihan, terutama dalam bentuk minuman manis, memiliki hubungan erat dengan epidemi obesitas global. Gula mengandung kalori kosong yang tidak memberikan nutrisi penting bagi tubuh. Ketika dikonsumsi dalam jumlah besar, kelebihan kalori tersebut akan disimpan sebagai lemak tubuh. Studi menunjukkan bahwa orang yang rutin mengonsumsi minuman manis memiliki risiko 60% lebih tinggi mengalami obesitas, terlepas dari faktor gaya hidup lainnya.</p>
-
-                                <h3>2. Penyakit Diabetes Tipe 2</h3>
-                                <p>Konsumsi gula berlebihan dalam jangka panjang dapat menyebabkan resistensi insulin, suatu kondisi di mana sel-sel tubuh tidak merespons insulin secara efektif. Insulin adalah hormon yang mengatur kadar glukosa darah. Ketika tubuh menjadi resisten terhadap insulin, kadar gula darah meningkat, yang dapat berkembang menjadi diabetes tipe 2. Penelitian menunjukkan bahwa orang yang mengonsumsi 1-2 kaleng minuman manis setiap hari memiliki risiko 26% lebih tinggi mengembangkan diabetes tipe 2.</p>
-
-                                <h3>3. Penyakit Jantung dan Pembuluh Darah</h3>
-                                <p>Diet tinggi gula dikaitkan dengan peningkatan risiko penyakit jantung dan pembuluh darah. Konsumsi gula berlebihan dapat meningkatkan kadar trigliserida dan LDL (kolesterol jahat) dalam darah, serta menurunkan kadar HDL (kolesterol baik). Kombinasi ini meningkatkan risiko aterosklerosis, yaitu penumpukan plak di arteri yang dapat menyebabkan serangan jantung dan stroke.</p>
-
-                                <p>Selain itu, konsumsi gula berlebihan juga dikaitkan dengan peningkatan tekanan darah, yang merupakan faktor risiko utama penyakit kardiovaskular. Studi jangka panjang menunjukkan bahwa orang yang mengonsumsi 25% atau lebih kalori harian dari gula tambahan memiliki risiko dua kali lipat meninggal akibat penyakit jantung dibandingkan dengan mereka yang mengonsumsi kurang dari 10%.</p>
-
-                                <h3>4. Kerusakan Hati</h3>
-                                <p>Konsumsi fruktosa berlebihan, yang banyak terdapat dalam sirup jagung tinggi fruktosa dan gula tambahan lainnya, dapat menyebabkan penumpukan lemak di hati. Kondisi ini dikenal sebagai penyakit perlemakan hati non-alkoholik (NAFLD), yang dapat berkembang menjadi peradangan hati, fibrosis, dan bahkan sirosis. Studi menunjukkan bahwa orang yang rutin mengonsumsi minuman manis memiliki risiko lebih tinggi mengembangkan NAFLD dibandingkan dengan mereka yang jarang mengonsumsinya.</p>
-
-                                <h3>5. Masalah Kesehatan Gigi</h3>
-                                <p>Gula adalah makanan utama bagi bakteri yang menyebabkan kerusakan gigi. Ketika gula dan karbohidrat olahan lainnya dimakan, bakteri di mulut menghasilkan asam yang menyerang email gigi. Konsumsi gula berlebihan, terutama dalam bentuk makanan dan minuman yang lengket atau dinikmati sepanjang hari, sangat meningkatkan risiko karies gigi. Penelitian menunjukkan bahwa anak-anak yang mengonsumsi 3 atau lebih makanan manis per hari memiliki prevalensi karies yang jauh lebih tinggi.</p>
-
-                                <h3>6. Penuaan Kulit Dini</h3>
-                                <p>Diet tinggi gula dapat mempercepat proses penuaan kulit melalui proses yang disebut glikasi. Glikasi terjadi ketika molekul gula berikatan dengan protein dalam tubuh, membentuk produk akhir glikasi lanjut (AGEs). AGEs merusak kolagen dan elastin, protein yang menjaga kulit tetap kencang dan elastis. Akibatnya, kulit menjadi lebih cepat keriput dan kehilangan kekenyalannya. Penelitian dermatologi menunjukkan bahwa orang dengan diet tinggi gula cenderung memiliki tanda-tanda penuaan kulit yang lebih jelas dibandingkan dengan mereka yang mengonsumsi lebih sedikit gula.</p>
-
-                                <h2>Jenis Gula yang Perlu Diwaspadai</h2>
-
-                                <p>Gula hadir dalam berbagai bentuk dan nama dalam produk makanan. Beberapa jenis gula yang umum ditemukan dalam makanan olahan meliputi:</p>
-
-                                <ul>
-                                    <li><strong>Sukrosa:</strong> Gula meja biasa yang berasal dari tebu atau bit gula</li>
-                                    <li><strong>Fruktosa:</strong> Gula alami yang ditemukan dalam buah-buahan</li>
-                                    <li><strong>Glukosa:</strong> Gula sederhana yang merupakan sumber energi utama tubuh</li>
-                                    <li><strong>Laktosa:</strong> Gula alami yang ditemukan dalam susu</li>
-                                    <li><strong>Maltosa:</strong> Gula yang dihasilkan dari pemecahan pati</li>
-                                    <li><strong>Sirup jagung tinggi fruktosa:</strong> Pemanis buatan yang umum digunakan dalam makanan dan minuman olahan</li>
-                                    <li><strong>Madu:</strong> Meskipun alami, tetap mengandung gula dalam jumlah tinggi</li>
-                                    <li><strong>Sirup maple:</strong> Pemanis alami dari getah pohon maple</li>
-                                    <li><strong>Molase:</strong> Produk sampingan dari pembuatan gula</li>
-                                </ul>
-
-                                <h2>Cara Mengurangi Konsumsi Gula</h2>
-
-                                <p>Mengurangi konsumsi gula membutuhkan kesadaran dan usaha yang konsisten. Berikut beberapa strategi yang dapat membantu:</p>
-
-                                <ul>
-                                    <li><strong>Baca label makanan:</strong> Periksa daftar bahan dan informasi nilai gizi untuk mengetahui kandungan gula dalam produk</li>
-                                    <li><strong>Kurangi minuman manis:</strong> Minuman bersoda, jus buah kemasan, dan minuman energi sering mengandung gula dalam jumlah sangat tinggi</li>
-                                    <li><strong>Pilih makanan alami:</strong> Konsumsi lebih banyak buah-buahan, sayuran, biji-bijian utuh, dan protein tanpa tambahan gula</li>
-                                    <li><strong>Masak di rumah:</strong> Dengan memasak sendiri, Anda dapat mengontrol jumlah gula yang ditambahkan</li>
-                                    <li><strong>Coba alternatif pemanis:</strong> Gunakan buah-buahan matang atau rempah-rempah seperti kayu manis untuk menambah rasa manis alami</li>
-                                    <li><strong>Kurangi secara bertahap:</strong> Mengurangi gula secara perlahan dapat membantu lidah Anda beradaptasi dengan tingkat kemanisan yang lebih rendah</li>
-                                </ul>
-
-                                <div className="highlight-box">
-                                    "Kunci untuk mengurangi konsumsi gula adalah kesadaran. Mulailah dengan memperhatikan berapa banyak gula yang Anda konsumsi setiap hari, lalu tetapkan target realistis untuk menguranginya secara bertahap." - Tim Nutrisi Sehat Kita
-                                </div>
-
-                                <h2>Kesimpulan</h2>
-
-                                <p>Meskipun gula merupakan sumber energi instan bagi tubuh, konsumsi berlebihan dapat menimbulkan berbagai masalah kesehatan serius. Dengan meningkatkan kesadaran tentang kandungan gula dalam makanan dan minuman yang kita konsumsi, serta mengambil langkah-langkah untuk menguranginya, kita dapat melindungi kesehatan jangka panjang dan meningkatkan kualitas hidup secara keseluruhan. Ingatlah bahwa perubahan kecil namun konsisten dalam pola makan dapat memberikan dampak besar bagi kesehatan Anda.</p>
-
-                                <p>Konsultasikan dengan profesional kesehatan atau ahli gizi terdaftar untuk mendapatkan saran yang disesuaikan dengan kebutuhan dan kondisi kesehatan Anda secara spesifik. Dengan pendekatan yang tepat, mengurangi konsumsi gula dapat menjadi langkah awal yang penting menuju gaya hidup yang lebih sehat dan bebas dari penyakit kronis.</p>
-                            </div>
-                        </article>
-
-                        <section className="related-articles">
-                            <h3>Artikel Terkait</h3>
-                            <div className="related-grid">
-                                <div className="related-card">
-                                    <div className="related-image" style={{backgroundImage: "url('/api/placeholder/400/250')"}}></div>
-                                    <div className="related-content">
-                                        <h4><a href="#">7 Alternatif Gula yang Lebih Sehat untuk Dicoba</a></h4>
-                                        <div className="related-meta">15 April 2025 | Nutrisi</div>
-                                    </div>
-                                </div>
-                                <div className="related-card">
-                                    <div className="related-image" style={{backgroundImage: "url('/api/placeholder/400/250')"}}></div>
-                                    <div className="related-content">
-                                        <h4><a href="#">Cara Mengatasi Kecanduan Gula dalam 30 Hari</a></h4>
-                                        <div className="related-meta">10 April 2025 | Psikologi</div>
-                                    </div>
-                                </div>
-                                <div className="related-card">
-                                    <div className="related-image" style={{backgroundImage: "url('/api/placeholder/400/250')"}}></div>
-                                    <div className="related-content">
-                                        <h4><a href="#">Mitos dan Fakta Seputar Gula dan Diabetes</a></h4>
-                                        <div className="related-meta">5 April 2025 | Kesehatan</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </main>
-
-                    <footer>
-                        <div className="container">
-                            <div className="footer-content">
-                                <div className="footer-column">
-                                    <h3>Sehat Kita</h3>
-                                    <p>Portal berita kesehatan terpercaya dengan informasi terkini tentang nutrisi, fitness, dan gaya hidup sehat.</p>
-                                </div>
-                                <div className="footer-column">
-                                    <h3>Kategori</h3>
-                                    <ul>
-                                        <li><a href="#">Berita Terkini</a></li>
-                                        <li><a href="#">Nutrisi</a></li>
-                                        <li><a href="#">Fitness</a></li>
-                                        <li><a href="#">Mental Health</a></li>
-                                        <li><a href="#">Panduan Hidup Sehat</a></li>
-                                    </ul>
-                                </div>
-                                <div className="footer-column">
-                                    <h3>Pusat Informasi</h3>
-                                    <ul>
-                                        <li><a href="#">Tentang Kami</a></li>
-                                        <li><a href="#">Tim Redaksi</a></li>
-                                        <li><a href="#">Karir</a></li>
-                                        <li><a href="#">Kebijakan Privasi</a></li>
-                                        <li><a href="#">Syarat dan Ketentuan</a></li>
-                                    </ul>
-                                </div>
-                                <div className="footer-column">
-                                    <h3>Kontak</h3>
-                                    <ul>
-                                        <li>Gedung Sehat, Jl. Kesehatan No. 123</li>
-                                        <li>Jakarta Selatan, Indonesia</li>
-                                        <li>Email: info@sehatkita.com</li>
-                                        <li>Telp: (021) 1234-5678</li>
-                                        <li>
-                                            <button className="contact-
+</body>
+</html>
