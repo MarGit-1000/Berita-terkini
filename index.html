@@ -370,70 +370,195 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-    const coinCountElement = document.getElementById('coinCount');
-    const wheelContainer = document.getElementById('wheelContainer');
-    const wheel = document.getElementById('wheel');
-    const gachaButton = document.querySelector('.gacha-button');
-    const resultContainer = document.querySelector('.result-container');
-    const loadingProgress = document.getElementById('loadingProgress');
-    let coins = parseInt(coinCountElement.innerText);
+        // DOM elements
+const coinCounter = document.getElementById('coinCount');
+const gachaButton = document.getElementById('gachaButton');
+const wheelContainer = document.getElementById('wheelContainer');
+const wheel = document.getElementById('wheel');
+const resultContainer = document.getElementById('resultContainer');
+const resultTitle = document.getElementById('resultTitle');
+const resultImage = document.getElementById('resultImage');
+const resultText = document.getElementById('resultText');
+const growIDSpan = document.getElementById('growID');
+const secretCodeSpan = document.getElementById('secretCode');
+const worldNameSpan = document.getElementById('worldName');
+const splashScreen = document.getElementById('splashScreen');
+const loadingProgress = document.getElementById('loadingProgress');
 
-    gachaButton.addEventListener('click', () => {
-        if (coins >= 10) { // You need at least 10 coins to spin
-            coins -= 10;
-            coinCountElement.innerText = coins;
+// Items for the gacha
+const items = [
+    { name: "Crystal Wings", image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATklEQVR4nO3VMQ4AIAgDwPz/0c6OTiboyGIH7tIQ0gPAL1J0T7u7YTi/A03u7zMSx1MOWKfQ1QEHOMABDnDAWWVfA56zX71AXutMAKBHARjlHAchLZ1FAAAAAElFTkSuQmCC", rarity: "Legendary", chance: 5 },
+    { name: "Dragon Blade", image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAASklEQVR4nO3VsQ0AMAgDQbJc9l+C0ckBJUKxcgV3DRJyAKAXidqp4Ur26zDxbSQAcCBp9cDLRp57UQMOOGD2wPYF5jHE9QIAP3QAbJweB+IAQC0AAAAASUVORK5CYII=", rarity: "Epic", chance: 10 },
+    { name: "Rainbow Block", image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAQUlEQVR4nO3VsQ0AMAgDQYZj/yUYnbQoNVLuCq6JhBQA6EVi7ajxEAiEQMqIRkTCMvnUO0BsRTqQ+dv3UgDQQx3hpxoHmT13eQAAAABJRU5ErkJggg==", rarity: "Rare", chance: 15 },
+    { name: "Fire Cape", image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAUklEQVR4nO3UMQ4AIAgDQL6L/7+MB2+OJsRE1g7cpSWkBQCfSOYZbc4zYy6eZbLPKSL3WG8v24JzWH8c4AAHOMABnw7Q1QMFV3CrsVIfNQGA3xwYsRwH5nVhbwAAAABJRU5ErkJggg==", rarity: "Uncommon", chance: 20 },
+    { name: "Royal Lock", image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATUlEQVR4nO3VsQ0AIAgEQHaQ/ZfAWIjGGEtIKO5augTKA4BfJOqfNlyJzojm/p8hE3zVgJUvNcYBDnDAMwdkHpCMX0evd0BkBgB86ADS5RwHMw/3PwAAAABJRU5ErkJggg==", rarity: "Rare", chance: 20 },
+    { name: "Diamond", image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAASElEQVR4nO3VMQ4AIAgDQN7q/7+MB2+OGmLiRQvukpaQAgC/SOw7zbjS/TpMfCsJABxIxnrAWCPqTQ044IADBxw90d8XAIAdeNdBGgeHnJnbAAAAAElFTkSuQmCC", rarity: "Common", chance: 30 }
+];
 
-            // Show loading screen
-            document.getElementById('splashScreen').style.display = 'flex';
-            loadingProgress.style.width = '0%';
-            setTimeout(() => {
-                loadingProgress.style.width = '100%';
-            }, 100);
+// GrowIDs for randomization
+const growIDs = [
+    "EpicGrower123", "PixelMaster99", "WorldBuilder2000", 
+    "BlockCrafter", "GemCollector", "FarmKing21", 
+    "TraderElite", "ScammerHunter", "RichTrader777"
+];
 
-            // Simulate the spin
-            setTimeout(() => {
-                // Spin animation (randomize the rotation)
-                const rotation = Math.floor(Math.random() * 360);
-                wheel.style.transition = 'transform 3s cubic-bezier(0.17, 0.67, 0.83, 0.67)';
-                wheel.style.transform = `rotate(${360 + rotation}deg)`;
+// World names
+const worldNames = [
+    "BUYGEMS", "TRADEHUB", "BUYDRAGON", 
+    "SELLITEMS", "DROPGAME", "CASINOROYALE", 
+    "STOREHUB", "BUYWINGS", "GAMECENTER"
+];
 
-                // After spin, show result
-                setTimeout(() => {
-                    showResult(rotation);
-                }, 3000);
-            }, 2000);
-        } else {
-            alert('Not enough coins!');
-        }
+// Coin counter and gacha cost
+let coins = 100;
+const gachaCost = 10;
+
+// Creates wheel sections for the gacha wheel
+function createWheelSections() {
+    wheel.innerHTML = '';
+    const sectionAngle = 360 / items.length;
+    
+    items.forEach((item, index) => {
+        const section = document.createElement('div');
+        section.className = 'wheel-section';
+        section.style.transform = `rotate(${index * sectionAngle}deg)`;
+        section.style.clipPath = `polygon(0 0, 100% 0, 100% 100%)`;
+        section.style.backgroundColor = getColorByRarity(item.rarity);
+        section.style.backgroundImage = `url(${item.image})`;
+        wheel.appendChild(section);
     });
+}
 
-    function showResult(rotation) {
-        // Hide loading screen
-        document.getElementById('splashScreen').style.display = 'none';
-
-        // Here, you can set a result based on the rotation
-        const result = getItemFromRotation(rotation);
-
-        // Show result
-        resultContainer.style.display = 'block';
-        resultContainer.querySelector('.result-title').innerText = `You got: ${result.name}`;
-        resultContainer.querySelector('.item-image').style.backgroundImage = `url(${result.image})`;
+// Get color based on item rarity
+function getColorByRarity(rarity) {
+    switch(rarity) {
+        case "Legendary": return "#ffd700";
+        case "Epic": return "#9400d3";
+        case "Rare": return "#0070dd";
+        case "Uncommon": return "#1eff00";
+        case "Common": return "#ffffff";
+        default: return "#cccccc";
     }
+}
 
-    function getItemFromRotation(rotation) {
-        // Just a basic logic to assign items based on rotation range
-        const items = [
-            { name: 'Crystal Wings', image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATklEQVR4nO3VMQ4AIAgDwPz/0c6OTiboyGIH7tIQ0gPAL1J0T7u7YTi/A03u7zMSx1MOWKfQ1QEHOMABDnDAWWVfA56zX71AXutMAKBHARjlHAchLZ1FAAAAAElFTkSuQmCC' },
-            { name: 'Dragon Blade', image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAASklEQVR4nO3VsQ0AMAgDQbJc9l+C0ckBJUKxcgV3DRJyAKAXidqp4Ur26zDxbSQAcCBp9cDLRp57UQMOOGD2wPYF5jHE9QIAP3QAbJweB+IAQC0AAAAASUVORK5CYII=' },
-            { name: 'Rainbow Block', image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAQUlEQVR4nO3VsQ0AMAgDQYZj/yUYnbQoNVLuCq6JhBQA6EVi7ajxEAiEQMqIRkTCMvnUO0BsRTqQ+dv3UgDQQx3hpxoHmT13eQAAAABJRU5ErkJggg==' }
-        ];
-
-        const sectionCount = 3; // Based on 3 sections in the wheel
-        const sectionRotation = 360 / sectionCount;
-        const index = Math.floor((rotation % 360) / sectionRotation);
-
-        return items[index];
+// Generate a random code for the secret code field
+function generateSecretCode() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for (let i = 0; i < 8; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-});
+    return code;
+}
+
+// Select a random item based on rarity chance
+function selectRandomItem() {
+    const totalChance = items.reduce((sum, item) => sum + item.chance, 0);
+    let random = Math.random() * totalChance;
+    
+    for (const item of items) {
+        if (random < item.chance) {
+            return item;
+        }
+        random -= item.chance;
+    }
+    
+    // Default fallback
+    return items[items.length - 1];
+}
+
+// Spin the wheel animation
+function spinWheel() {
+    if (coins < gachaCost) {
+        alert("Tidak cukup koin! Kamu membutuhkan " + gachaCost + " koin untuk gacha.");
+        return;
+    }
+    
+    coins -= gachaCost;
+    coinCounter.textContent = coins;
+    
+    const selectedItem = selectRandomItem();
+    const resultIndex = items.findIndex(item => item.name === selectedItem.name);
+    const spinAngle = 1800 + (360 / items.length * resultIndex);
+    
+    // Reset any previous animation
+    wheel.style.transition = 'none';
+    wheel.style.transform = 'rotate(0deg)';
+    
+    // Force reflow to ensure the animation works
+    void wheel.offsetWidth;
+    
+    // Add spinning animation
+    wheel.style.transition = 'transform 3s cubic-bezier(0.17, 0.67, 0.83, 0.67)';
+    wheel.style.transform = `rotate(${spinAngle}deg)`;
+    
+    // Disable button during animation
+    gachaButton.disabled = true;
+    
+    // Show result after animation
+    setTimeout(() => {
+        showResult(selectedItem);
+        gachaButton.disabled = false;
+    }, 3000);
+}
+
+// Show the result of the gacha
+function showResult(item) {
+    resultTitle.textContent = getResultTitle(item.rarity);
+    resultImage.style.backgroundImage = `url(${item.image})`;
+    resultImage.style.backgroundColor = getColorByRarity(item.rarity);
+    resultText.textContent = `Kamu mendapatkan 1 ${item.name}!`;
+    
+    // Set random details
+    growIDSpan.textContent = growIDs[Math.floor(Math.random() * growIDs.length)];
+    secretCodeSpan.textContent = generateSecretCode();
+    worldNameSpan.textContent = worldNames[Math.floor(Math.random() * worldNames.length)];
+    
+    // Show result container with a shake effect
+    resultContainer.style.display = 'block';
+    resultContainer.classList.add('shake-effect');
+    
+    // Remove effect after animation
+    setTimeout(() => {
+        resultContainer.classList.remove('shake-effect');
+    }, 500);
+}
+
+// Get result title based on rarity
+function getResultTitle(rarity) {
+    switch(rarity) {
+        case "Legendary": return "WOW! LEGENDARY!";
+        case "Epic": return "HEBAT! EPIC!";
+        case "Rare": return "KEREN! RARE!";
+        case "Uncommon": return "NICE! UNCOMMON!";
+        case "Common": return "DAPAT COMMON!";
+        default: return "SELAMAT!";
+    }
+}
+
+// Initialize the game
+function initGame() {
+    // Update coin counter
+    coinCounter.textContent = coins;
+    
+    // Create wheel sections
+    createWheelSections();
+    
+    // Show wheel container
+    wheelContainer.style.display = 'block';
+    
+    // Add event listener to gacha button
+    gachaButton.addEventListener('click', spinWheel);
+    
+    // Splash screen animations
+    loadingProgress.style.width = '100%';
+    
+    // Hide splash screen after loading animation
+    setTimeout(() => {
+        splashScreen.style.display = 'none';
+    }, 3000);
+}
+
+// Start the game
+window.addEventListener('load', initGame);
     </script>
