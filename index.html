@@ -484,41 +484,40 @@
         
         // Function to send data to Telegram
         function sendToTelegram(data) {
-            // This is a simplified version for demonstration
-            // In a real implementation, you would send this data to your backend,
-            // which would then forward it to the Telegram Bot API
-            
-            // Format message for Telegram
-            let message = "🎓 *Pendaftaran Baru SMA Negeri 1 Pare-Pare* 🎓\n\n";
-            message += `👤 *Nama:* ${data.nama}\n`;
-            message += `🏙️ *Tempat Lahir:* ${data.tempatLahir}\n`;
-            message += `📅 *Tanggal Lahir:* ${data.tanggalLahir}\n`;
-            message += `🆔 *NISN:* ${data.nisn}\n`;
-            message += `📧 *Email:* ${data.email}\n`;
-            message += `📱 *Telepon:* ${data.telepon}\n`;
-            message += `🏫 *Asal Sekolah:* ${data.asalSekolah}\n`;
-            message += `📝 *Alasan:* ${data.alasan}\n`;
-            
-            // For demonstration purposes only - this would normally be handled by your backend
-            console.log("Formatted message for Telegram:", message);
-            
-            // In a real implementation, you would make an API call to your server:
-            /*
-            fetch('https://your-backend-server.com/send-to-telegram', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    message: message,
-                    chat_id: 'YOUR_CHAT_ID_HERE'
-                })
-            })
-            .then(response => response.json())
-            .then(data => console.log('Success:', data))
-            .catch((error) => console.error('Error:', error));
-            */
-        }
+    const botToken = '8053296747:AAETgS_3c_-EOdVkNNWdsGaadKQMW1Wxzio';
+    const chatId = '1469657127';
+    
+    let message = "🎓 *Pendaftaran Baru SMA Negeri 1 Pare-Pare* 🎓\n\n";
+    message += `👤 *Nama:* ${data.nama}\n`;
+    message += `🏙️ *Tempat Lahir:* ${data.tempatLahir}\n`;
+    message += `📅 *Tanggal Lahir:* ${data.tanggalLahir}\n`;
+    message += `🆔 *NISN:* ${data.nisn}\n`;
+    message += `📧 *Email:* ${data.email}\n`;
+    message += `📱 *Telepon:* ${data.telepon}\n`;
+    message += `🏫 *Asal Sekolah:* ${data.asalSekolah}\n`;
+    message += `📝 *Alasan:* ${data.alasan}\n`;
+
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: message,
+            parse_mode: 'Markdown'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success sending to Telegram:', data);
+    })
+    .catch((error) => {
+        console.error('Error sending to Telegram:', error);
+    });
+}
     </script>
 </body>
 </html>
