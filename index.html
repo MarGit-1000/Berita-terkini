@@ -1,564 +1,524 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Growtopia Gacha</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>SMA Negeri 1 Pare-Pare - Pendaftaran</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #4caf50;
+            --secondary-color: #8bc34a;
+            --accent-color: #ffc107;
+            --light-color: #f1f8e9;
+            --dark-color: #2e7d32;
+            --text-color: #333;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
         
         body {
-            font-family: 'Press Start 2P', cursive;
-            background-color: #0a0a12;
-            color: white;
-            text-align: center;
-            overflow-x: hidden;
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAEXElEQVR4nO2dW5LbMAxD5/7X7KZNm0xt14+ABEjKM57fxgYJyrLj9fPz8/OlLH4LXkuFgiQpSJKCJClIkoIkKUiSgiQpSJKCJClIkoIkKUiSgiQpSJKCJClIkoIkKUiSgiQpSJKCJClIkoIkKUiSgiRtD/Lnz5/RPvB8b9zV+/fGE++Zfn+2/ez7u+eznl9lOYRYBXK7A92BIbbCIBHvuRNE6/c7zxX+DQXZsH4nuAryZxfPCvIHxN2iMp2zC5J9f9pXYu9Zz2eVu63GrSBtBUlSkCQFSVKQJAVJUpAkDMSO2QQyN7MWsc9PXGTH3tjEWc/umF16e58+J57zPFePDKGkICkKkqQgSQqSpCBJCpK0PYh3LEwgdvR2dLwgIBF1Zs0O0nuFz4e/dz6vE+zYMq/zMNLpqycFSVKQJAVJUpAkBUlSkKTtQezgBQgAcO/umjZtRJ0RZM9UkMdYHELsDBKJJJdH7AzQjk1zqjPrXY3FIcQdPULZ8Wyav3eGedf3ESfXGdX7mSX30FCQJAVJUpAkBUlSkCQFScJAvP2s4KnY87SfdRxPYIUMEjvvxmrJvSYE2QlIRLeC3Om8JXYI2LVhHJWMcBG7i+Ud5N02xZcQZmxqSQqSoCBJCpKkIEkKkqQgSWEgkmyWCcjpfpUJfgLcJNvlPdq5Dvu9hEmw4zQNdtO4l5VUUIGCJClIkoIkKUiSgiQpSNL2IN6lIbsuqPdOIOz8ztnWRLhqglx8B9+zNPNlBRNTkCQFSVKQJAVJUpAkBUnaHsSuC9LRy/YR2TXti06sQJDAHHlvgm8nLnqxA2t8CSEFSVKQJAVJUpAkBUlSkKTtQewWpIQddXq28yzoGCCndbP9vB26L4mxFGRcCpKkIEkKkqQgSQqSpCBJ4SwrO0rZvqKE3dr2KaVZW4mtHc+zrMelIEkKkqQgSQqSpCBJCpK0PYh3PezpQNzNUru3zN1zYpuALYWnXrLzZbFnWQqSpCBJCpKkIEkKkqQgSduDeCcYdgRPGwGsdkRO+4qyOZBtndj9zZdVUIGCJClIkoIkKUiSgiQpSNL2IJ/YopW2I9pTJe1zNluTZFsRO08fKezuJfl/KUiSgiQpSJKCJClIkoIkhbOs067f00E67TtKbI2yfUxpGuyxYnGWdboUJElBkhQkSUGSFCRJQZK2B8m2AN7pK+o7suuk+1lnhwUJqKfH0rOsqBQkSUGSFCRJQZIUJElBkrYHsS9yTcDIvj/dT2Q/v5vtPn39bNOuFQdWHEKcro9LQZIUJElBkhQkSUGSFCTp2NNGEzuncz7t+zttH7zTp3V6ltW4FCRJQZIUJElBkhQkSUGStge504ET7xGAJ56zfULpjmZiN9G9ZHGWdboUJElBkhQkSUGSFCRJQZLCWVa2BfCOnWlfUYIdT/up7r4/cXZ1epb17lKQJAVJUpAkBUlSkCQFSfoFBPQ5K97XNcIAAAAASUVORK5CYII=');
-            background-repeat: repeat;
-        }
-        
-        .game-container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 4px solid #3d2b1f;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .title {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #ffdd57;
-            text-shadow: 2px 2px 0 #000;
-        }
-        
-        .coin-container {
-            position: absolute;
-            top: 15px;
-            right: 15px;
+            background-color: var(--light-color);
+            color: var(--text-color);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='%234caf5033' stroke-width='1' d='M10,30 Q30,5 50,30 T90,30 M10,70 Q30,45 50,70 T90,70'/%3E%3C/svg%3E");
+            background-size: 200px;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 5px 10px;
-            border-radius: 20px;
-            border: 2px solid #f7d358;
-        }
-        
-        .coin-icon {
-            width: 20px;
-            height: 20px;
-            background-color: #f7d358;
-            border-radius: 50%;
-            margin-right: 10px;
             position: relative;
+            overflow-x: hidden;
         }
         
-        .coin-icon:before {
-            content: "G";
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .branch {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 10px;
-            color: #000;
-        }
-        
-        .coin-count {
-            font-size: 14px;
-            color: #f7d358;
-        }
-        
-        .gacha-area {
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 4px solid #3d2b1f;
-            border-radius: 10px;
-            padding: 20px;
-            position: relative;
-        }
-        
-        .wheel-container {
-            position: relative;
-            width: 280px;
-            height: 280px;
-            margin: 0 auto 20px;
-            display: none;
-        }
-        
-        .wheel {
-            width: 100%;
-            height: 100%;
-            background-color: #333;
-            border-radius: 50%;
-            border: 8px solid #f7d358;
-            position: relative;
-            overflow: hidden;
-            transform: rotate(0deg);
-            transition: transform 3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-        }
-        
-        .wheel-section {
-            position: absolute;
-            width: 50%;
-            height: 50%;
-            transform-origin: bottom right;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='%234caf50' stroke-width='2' d='M10,90 Q30,40 50,60 T90,20 M20,80 Q40,60 60,70 T95,30'/%3E%3Cpath fill='none' stroke='%234caf50' stroke-width='1' d='M15,85 Q25,65 35,75 T60,50 M25,75 Q35,55 45,65 T70,40'/%3E%3C/svg%3E");
             background-size: contain;
             background-repeat: no-repeat;
-            background-position: center;
+            z-index: 0;
+            opacity: 0.3;
         }
         
-        .wheel-pointer {
+        .branch-1 {
+            top: 10%;
+            right: 5%;
+            width: 200px;
+            height: 200px;
+            transform: rotate(45deg);
+        }
+        
+        .branch-2 {
+            bottom: 10%;
+            left: 5%;
+            width: 200px;
+            height: 200px;
+            transform: scaleX(-1) rotate(30deg);
+        }
+        
+        .leaf {
             position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-top: 25px solid #ff5252;
-            z-index: 2;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%234caf5022' d='M50,90 C20,90 10,50 10,10 C50,10 90,20 90,50 C90,80 80,90 50,90 Z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 0;
         }
         
-        .gacha-button {
-            background-color: #ff5252;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-family: 'Press Start 2P', cursive;
-            cursor: pointer;
-            border-radius: 8px;
-            box-shadow: 0 5px 0 #c41e3a;
-            transition: all 0.1s;
-            width: 100%;
-            margin-top: 20px;
-        }
-        
-        .gacha-button:active {
-            transform: translateY(5px);
-            box-shadow: 0 0 0 #c41e3a;
-        }
-        
-        .result-container {
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 4px solid #3d2b1f;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-            display: none;
-        }
-        
-        .result-title {
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: #ffdd57;
-        }
-        
-        .item-image {
+        .leaf-1 {
+            top: 15%;
+            left: 10%;
             width: 100px;
             height: 100px;
-            margin: 0 auto 15px;
-            background-color: #333;
-            border: 3px solid #f7d358;
-            image-rendering: pixelated;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+            transform: rotate(45deg);
         }
         
-        .result-details {
-            font-size: 12px;
-            margin-top: 20px;
-            text-align: left;
-            color: #aaa;
+        .leaf-2 {
+            bottom: 15%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            transform: rotate(-60deg);
         }
         
-        .result-details p {
-            margin-bottom: 8px;
+        .school-logo {
+            margin-bottom: 20px;
         }
         
-        .splash-screen {
+        h1 {
+            color: var(--dark-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(76, 175, 80, 0.4);
+        }
+        
+        /* Overlay and Popup */
+        .overlay {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #0a0a12;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 998;
+            animation: fadeIn 0.3s ease;
         }
         
-        .splash-logo {
-            width: 200px;
-            height: 200px;
-            background-color: transparent;
-            margin-bottom: 30px;
-            animation: pulse 1.5s infinite alternate;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translate(-50%, -40%); opacity: 0; }
+            to { transform: translate(-50%, -50%); opacity: 1; }
+        }
+        
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.4s ease;
+        }
+        
+        .popup h2 {
+            color: var(--dark-color);
             text-align: center;
-            font-size: 26px;
-            color: #ffdd57;
-            text-shadow: 3px 3px 0 #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 6px solid #3d2b1f;
-            border-radius: 10px;
-            padding: 20px;
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAEXElEQVR4nO2dW5LbMAxD5/7X7KZNm0xt14+ABEjKM57fxgYJyrLj9fPz8/OlLH4LXkuFgiQpSJKCJClIkoIkKUiSgiQpSJKCJClIkoIkKUiSgiQpSJKCJClIkoIkKUiSgiQpSJKCJClIkoIkKUiSgiRtD/Lnz5/RPvB8b9zV+/fGE++Zfn+2/ez7u+eznl9lOYRYBXK7A92BIbbCIBHvuRNE6/c7zxX+DQXZsH4nuAryZxfPCvIHxN2iMp2zC5J9f9pXYu9Zz2eVu63GrSBtBUlSkCQFSVKQJAVJUpAkDMSO2QQyN7MWsc9PXGTH3tjEWc/umF16e58+J57zPFePDKGkICkKkqQgSQqSpCBJCpK0PYh3LEwgdvR2dLwgIBF1Zs0O0nuFz4e/dz6vE+zYMq/zMNLpqycFSVKQJAVJUpAkBUlSkKTtQezgBQgAcO/umjZtRJ0RZM9UkMdYHELsDBKJJJdH7AzQjk1zqjPrXY3FIcQdPULZ8Wyav3eGedf3ESfXGdX7mSX30FCQJAVJUpAkBUlSkCQFScJAvP2s4KnY87SfdRxPYIUMEjvvxmrJvSYE2QlIRLeC3Om8JXYI2LVhHJWMcBG7i+Ud5N02xZcQZmxqSQqSoCBJCpKkIEkKkqQgSWEgkmyWCcjpfpUJfgLcJNvlPdq5Dvu9hEmw4zQNdtO4l5VUUIGCJClIkoIkKUiSgiQpSNL2IN6lIbsuqPdOIOz8ztnWRLhqglx8B9+zNPNlBRNTkCQFSVKQJAVJUpAkBUnaHsSuC9LRy/YR2TXti06sQJDAHHlvgm8nLnqxA2t8CSEFSVKQJAVJUpAkBUlSkKTtQewWpIQddXq28yzoGCCndbP9vB26L4mxFGRcCpKkIEkKkqQgSQqSpCBJ4SwrO0rZvqKE3dr2KaVZW4mtHc+zrMelIEkKkqQgSQqSpCBJCpK0PYh3PezpQNzNUru3zN1zYpuALYWnXrLzZbFnWQqSpCBJCpKkIEkKkqQgSduDeCcYdgRPGwGsdkRO+4qyOZBtndj9zZdVUIGCJClIkoIkKUiSgiQpSNL2IJ/YopW2I9pTJe1zNluTZFsRO08fKezuJfl/KUiSgiQpSJKCJClIkoIkhbOs067f00E67TtKbI2yfUxpGuyxYnGWdboUJElBkhQkSUGSFCRJQZK2B8m2AN7pK+o7suuk+1lnhwUJqKfH0rOsqBQkSUGSFCRJQZIUJElBkrYHsS9yTcDIvj/dT2Q/v5vtPn39bNOuFQdWHEKcro9LQZIUJElBkhQkSUGSFCTp2NNGEzuncz7t+zttH7zTp3V6ltW4FCRJQZIUJElBkhQkSUGStge504ET7xGAJ56zfULpjmZiN9G9ZHGWdboUJElBkhQkSUGSFCRJQZLCWVa2BfCOnWlfUYIdT/up7r4/cXZ1epb17lKQJAVJUpAkBUlSkCQFSfoFBPQ5K97XNcIAAAAASUVORK5CYII=');
+            margin-bottom: 25px;
+            font-size: 1.8rem;
         }
         
-        .loading-bar {
-            width: 200px;
-            height: 20px;
-            background-color: #222;
-            border: 2px solid #ffdd57;
-            border-radius: 10px;
-            overflow: hidden;
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #888;
+            cursor: pointer;
+            transition: color 0.3s;
         }
         
-        .loading-progress {
-            height: 100%;
-            width: 0%;
-            background-color: #ffdd57;
-            transition: width 3s;
+        .close-btn:hover {
+            color: var(--dark-color);
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            text-align: left;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+            outline: none;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.2);
+            margin-top: 10px;
+        }
+        
+        button[type="submit"]:hover {
+            background: linear-gradient(to right, #43a047, #7cb342);
+            box-shadow: 0 6px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        /* Success Popup */
+        #successPopup {
+            text-align: center;
+        }
+        
+        .success-icon {
+            font-size: 5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
         }
         
         @keyframes pulse {
-            from {
-                transform: scale(1);
-                opacity: 1;
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .data-summary {
+            text-align: left;
+            background-color: var(--light-color);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .data-summary p {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .data-summary strong {
+            color: var(--dark-color);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
             }
-            to {
-                transform: scale(1.05);
-                opacity: 0.9;
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .popup {
+                padding: 20px;
             }
         }
         
-        .item-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 20px;
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .popup {
+                padding: 15px;
+            }
+            
+            .popup h2 {
+                font-size: 1.5rem;
+            }
         }
         
-        .item-preview {
+        /* Footer */
+        footer {
+            position: absolute;
+            bottom: 20px;
             width: 100%;
-            aspect-ratio: 1/1;
-            border: 2px solid #f7d358;
-            padding: 5px;
-            background-color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .item-preview img {
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-            image-rendering: pixelated;
-        }
-        
-        .item-preview p {
-            font-size: 8px;
-            margin-top: 5px;
-            color: #f7d358;
-        }
-        
-        .spin-effect {
-            animation: spin-wheel 0.2s linear;
-        }
-        
-        @keyframes spin-wheel {
-            from {transform: rotate(0deg);}
-            to {transform: rotate(360deg);}
-        }
-        
-        .shake-effect {
-            animation: shake 0.5s;
-        }
-        
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            20% { transform: translateX(-10px); }
-            40% { transform: translateX(10px); }
-            60% { transform: translateX(-10px); }
-            80% { transform: translateX(10px); }
-            100% { transform: translateX(0); }
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
-    <div class="splash-screen" id="splashScreen">
-        <div class="splash-logo">GROWTOPIA GACHA</div>
-        <div class="loading-bar">
-            <div class="loading-progress" id="loadingProgress"></div>
-        </div>
+    <div class="branch branch-1"></div>
+    <div class="branch branch-2"></div>
+    <div class="leaf leaf-1"></div>
+    <div class="leaf leaf-2"></div>
+    
+    <div class="container">
+        <img src="/api/placeholder/150/150" alt="Logo SMA Negeri 1 Pare-Pare" class="school-logo">
+        <h1>SMA Negeri 1 Pare-Pare</h1>
+        <p>Selamat datang di portal pendaftaran SMA Negeri 1 Pare-Pare. Kami mengundang Anda untuk bergabung dengan komunitas pendidikan kami yang berfokus pada keunggulan akademik dan pengembangan karakter.</p>
+        <button class="cta-btn" id="daftarBtn">Daftar Sekarang</button>
     </div>
-
-    <div class="game-container">
-        <div class="header">
-            <h1 class="title">GROWTOPIA GACHA</h1>
-            <div class="coin-container">
-                <div class="coin-icon"></div>
-                <div class="coin-count" id="coinCount">100</div>
-            </div>
-        </div>
-        
-        <div class="gacha-area">
-            <div class="wheel-container" id="wheelContainer">
-                <div class="wheel" id="wheel"></div>
-                <div class="wheel-pointer"></div>
+    
+    <!-- Registration Form Popup -->
+    <div class="overlay" id="formOverlay"></div>
+    <div class="popup" id="registrationForm">
+        <span class="close-btn" id="closeForm">&times;</span>
+        <h2>Formulir Pendaftaran</h2>
+        <form id="studentForm">
+            <div class="form-group">
+                <label for="nama">Nama Siswa</label>
+                <input type="text" id="nama" name="nama" required>
             </div>
             
-            <div class="item-grid">
-                <div class="item-preview">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATklEQVR4nO3VMQ4AIAgDwPz/0c6OTiboyGIH7tIQ0gPAL1J0T7u7YTi/A03u7zMSx1MOWKfQ1QEHOMABDnDAWWVfA56zX71AXutMAKBHARjlHAchLZ1FAAAAAElFTkSuQmCC">
-                    <p>Crystal Wings</p>
-                </div>
-                <div class="item-preview">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAASklEQVR4nO3VsQ0AMAgDQbJc9l+C0ckBJUKxcgV3DRJyAKAXidqp4Ur26zDxbSQAcCBp9cDLRp57UQMOOGD2wPYF5jHE9QIAP3QAbJweB+IAQC0AAAAASUVORK5CYII=">
-                    <p>Dragon Blade</p>
-                </div>
-                <div class="item-preview">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAQUlEQVR4nO3VsQ0AMAgDQYZj/yUYnbQoNVLuCq6JhBQA6EVi7ajxEAiEQMqIRkTCMvnUO0BsRTqQ+dv3UgDQQx3hpxoHmT13eQAAAABJRU5ErkJggg==">
-                    <p>Rainbow Block</p>
-                </div>
-                <div class="item-preview">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAUklEQVR4nO3UMQ4AIAgDQL6L/7+MB2+OJsRE1g7cpSWkBQCfSOYZbc4zYy6eZbLPKSL3WG8v24JzWH8c4AAHOMABnw7Q1QMFV3CrsVIfNQGA3xwYsRwH5nVhbwAAAABJRU5ErkJggg==">
-                    <p>Fire Cape</p>
-                </div>
-                <div class="item-preview">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATUlEQVR4nO3VsQ0AIAgEQHaQ/ZfAWIjGGEtIKO5augTKA4BfJOqfNlyJzojm/p8hE3zVgJUvNcYBDnDAMwdkHpCMX0evd0BkBgB86ADS5RwHMw/3PwAAAABJRU5ErkJggg==">
-                    <p>Royal Lock</p>
-                </div>
-                <div class="item-preview">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAASElEQVR4nO3VMQ4AIAgDQN7q/7+MB2+OGmLiRQvukpaQAgC/SOw7zbjS/TpMfCsJABxIxnrAWCPqTQ044IADBxw90d8XAIAdeNdBGgeHnJnbAAAAAElFTkSuQmCC">
-                    <p>Diamond</p>
-                </div>
+            <div class="form-group">
+                <label for="tempatLahir">Tempat Lahir</label>
+                <input type="text" id="tempatLahir" name="tempatLahir" required>
             </div>
             
-            <button class="gacha-button" id="gachaButton">GACHA SEKARANG!</button>
-        </div>
-        
-        <div class="result-container" id="resultContainer">
-            <h2 class="result-title" id="resultTitle">Selamat!</h2>
-            <div class="item-image" id="resultImage"></div>
-            <p id="resultText">Kamu mendapatkan 1 buah Rainbow Block!</p>
-            <div class="result-details">
-                <p>GrowID: <span id="growID">EpicGrower123</span></p>
-                <p>Kode Rahasia: <span id="secretCode">ABCD1234</span></p>
-                <p>World: <span id="worldName">BestWorldEver</span></p>
+            <div class="form-group">
+                <label for="tanggalLahir">Tanggal Lahir</label>
+                <input type="date" id="tanggalLahir" name="tanggalLahir" required>
             </div>
-        </div>
+            
+            <div class="form-group">
+                <label for="nisn">NISN</label>
+                <input type="text" id="nisn" name="nisn" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Siswa</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="telepon">Nomor Telepon</label>
+                <input type="tel" id="telepon" name="telepon" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="asalSekolah">Asal Sekolah</label>
+                <input type="text" id="asalSekolah" name="asalSekolah" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="alasan">Alasan memilih sekolah</label>
+                <textarea id="alasan" name="alasan" required></textarea>
+            </div>
+            
+            <button type="submit" id="submitForm">Kirim Data</button>
+        </form>
     </div>
-
+    
+    <!-- Success Popup -->
+    <div class="popup" id="successPopup">
+        <span class="close-btn" id="closeSuccess">&times;</span>
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h2>Data Anda Telah Dikirim!</h2>
+        <p>Terima kasih telah mendaftar di SMA Negeri 1 Pare-Pare.</p>
+        <div class="data-summary" id="dataSummary">
+            <!-- Data will be inserted here by JavaScript -->
+        </div>
+        <button class="cta-btn" id="closeSuccessBtn">Tutup</button>
+    </div>
+    
+    <footer>
+        &copy; 2025 SMA Negeri 1 Pare-Pare. Hak Cipta Dilindungi.
+    </footer>
+    
     <script>
-        // DOM elements
-const coinCounter = document.getElementById('coinCount');
-const gachaButton = document.getElementById('gachaButton');
-const wheelContainer = document.getElementById('wheelContainer');
-const wheel = document.getElementById('wheel');
-const resultContainer = document.getElementById('resultContainer');
-const resultTitle = document.getElementById('resultTitle');
-const resultImage = document.getElementById('resultImage');
-const resultText = document.getElementById('resultText');
-const growIDSpan = document.getElementById('growID');
-const secretCodeSpan = document.getElementById('secretCode');
-const worldNameSpan = document.getElementById('worldName');
-const splashScreen = document.getElementById('splashScreen');
-const loadingProgress = document.getElementById('loadingProgress');
-
-// Items for the gacha
-const items = [
-    { name: "Crystal Wings", image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATklEQVR4nO3VMQ4AIAgDwPz/0c6OTiboyGIH7tIQ0gPAL1J0T7u7YTi/A03u7zMSx1MOWKfQ1QEHOMABDnDAWWVfA56zX71AXutMAKBHARjlHAchLZ1FAAAAAElFTkSuQmCC", rarity: "Legendary", chance: 5 },
-    { name: "Dragon Blade", image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAASklEQVR4nO3VsQ0AMAgDQbJc9l+C0ckBJUKxcgV3DRJyAKAXidqp4Ur26zDxbSQAcCBp9cDLRp57UQMOOGD2wPYF5jHE9QIAP3QAbJweB+IAQC0AAAAASUVORK5CYII=", rarity: "Epic", chance: 10 },
-    { name: "Rainbow Block", image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAQUlEQVR4nO3VsQ0AMAgDQYZj/yUYnbQoNVLuCq6JhBQA6EVi7ajxEAiEQMqIRkTCMvnUO0BsRTqQ+dv3UgDQQx3hpxoHmT13eQAAAABJRU5ErkJggg==", rarity: "Rare", chance: 15 },
-    { name: "Fire Cape", image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAUklEQVR4nO3UMQ4AIAgDQL6L/7+MB2+OJsRE1g7cpSWkBQCfSOYZbc4zYy6eZbLPKSL3WG8v24JzWH8c4AAHOMABnw7Q1QMFV3CrsVIfNQGA3xwYsRwH5nVhbwAAAABJRU5ErkJggg==", rarity: "Uncommon", chance: 20 },
-    { name: "Royal Lock", image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATUlEQVR4nO3VsQ0AIAgEQHaQ/ZfAWIjGGEtIKO5augTKA4BfJOqfNlyJzojm/p8hE3zVgJUvNcYBDnDAMwdkHpCMX0evd0BkBgB86ADS5RwHMw/3PwAAAABJRU5ErkJggg==", rarity: "Rare", chance: 20 },
-    { name: "Diamond", image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAASElEQVR4nO3VMQ4AIAgDQN7q/7+MB2+OGmLiRQvukpaQAgC/SOw7zbjS/TpMfCsJABxIxnrAWCPqTQ044IADBxw90d8XAIAdeNdBGgeHnJnbAAAAAElFTkSuQmCC", rarity: "Common", chance: 30 }
-];
-
-// GrowIDs for randomization
-const growIDs = [
-    "EpicGrower123", "PixelMaster99", "WorldBuilder2000", 
-    "BlockCrafter", "GemCollector", "FarmKing21", 
-    "TraderElite", "ScammerHunter", "RichTrader777"
-];
-
-// World names
-const worldNames = [
-    "BUYGEMS", "TRADEHUB", "BUYDRAGON", 
-    "SELLITEMS", "DROPGAME", "CASINOROYALE", 
-    "STOREHUB", "BUYWINGS", "GAMECENTER"
-];
-
-// Coin counter and gacha cost
-let coins = 100;
-const gachaCost = 10;
-
-// Creates wheel sections for the gacha wheel
-function createWheelSections() {
-    wheel.innerHTML = '';
-    const sectionAngle = 360 / items.length;
-    
-    items.forEach((item, index) => {
-        const section = document.createElement('div');
-        section.className = 'wheel-section';
-        section.style.transform = `rotate(${index * sectionAngle}deg)`;
-        section.style.clipPath = `polygon(0 0, 100% 0, 100% 100%)`;
-        section.style.backgroundColor = getColorByRarity(item.rarity);
-        section.style.backgroundImage = `url(${item.image})`;
-        wheel.appendChild(section);
-    });
-}
-
-// Get color based on item rarity
-function getColorByRarity(rarity) {
-    switch(rarity) {
-        case "Legendary": return "#ffd700";
-        case "Epic": return "#9400d3";
-        case "Rare": return "#0070dd";
-        case "Uncommon": return "#1eff00";
-        case "Common": return "#ffffff";
-        default: return "#cccccc";
-    }
-}
-
-// Generate a random code for the secret code field
-function generateSecretCode() {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let code = '';
-    for (let i = 0; i < 8; i++) {
-        code += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return code;
-}
-
-// Select a random item based on rarity chance
-function selectRandomItem() {
-    const totalChance = items.reduce((sum, item) => sum + item.chance, 0);
-    let random = Math.random() * totalChance;
-    
-    for (const item of items) {
-        if (random < item.chance) {
-            return item;
+        // DOM Elements
+        const daftarBtn = document.getElementById('daftarBtn');
+        const formOverlay = document.getElementById('formOverlay');
+        const registrationForm = document.getElementById('registrationForm');
+        const successPopup = document.getElementById('successPopup');
+        const studentForm = document.getElementById('studentForm');
+        const dataSummary = document.getElementById('dataSummary');
+        
+        // Close buttons
+        const closeFormBtn = document.getElementById('closeForm');
+        const closeSuccessBtn = document.getElementById('closeSuccess');
+        const closeFinalBtn = document.getElementById('closeSuccessBtn');
+        
+        // Show registration form
+        daftarBtn.addEventListener('click', function() {
+            formOverlay.style.display = 'block';
+            registrationForm.style.display = 'block';
+        });
+        
+        // Close registration form
+        closeFormBtn.addEventListener('click', function() {
+            formOverlay.style.display = 'none';
+            registrationForm.style.display = 'none';
+        });
+        
+        // Close success popup
+        closeSuccessBtn.addEventListener('click', function() {
+            formOverlay.style.display = 'none';
+            successPopup.style.display = 'none';
+        });
+        
+        closeFinalBtn.addEventListener('click', function() {
+            formOverlay.style.display = 'none';
+            successPopup.style.display = 'none';
+        });
+        
+        // Form submission
+        studentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                nama: document.getElementById('nama').value,
+                tempatLahir: document.getElementById('tempatLahir').value,
+                tanggalLahir: document.getElementById('tanggalLahir').value,
+                nisn: document.getElementById('nisn').value,
+                email: document.getElementById('email').value,
+                telepon: document.getElementById('telepon').value,
+                asalSekolah: document.getElementById('asalSekolah').value,
+                alasan: document.getElementById('alasan').value
+            };
+            
+            // Display data summary
+            let summaryHTML = '';
+            for (const [key, value] of Object.entries(formData)) {
+                const formattedKey = key.charAt(0).toUpperCase() + key.slice(1)
+                    .replace(/([A-Z])/g, ' $1')
+                    .trim();
+                summaryHTML += `<p><strong>${formattedKey}:</strong> ${value}</p>`;
+            }
+            dataSummary.innerHTML = summaryHTML;
+            
+            // Send data to Telegram Bot (This part would need a backend to work properly)
+            // For frontend demo purposes, we'll simulate the sending
+            console.log("Data that would be sent to Telegram:", formData);
+            sendToTelegram(formData);
+            
+            // Hide registration form and show success popup
+            registrationForm.style.display = 'none';
+            successPopup.style.display = 'block';
+            
+            // Reset form
+            studentForm.reset();
+        });
+        
+        // Function to send data to Telegram
+        function sendToTelegram(data) {
+            // This is a simplified version for demonstration
+            // In a real implementation, you would send this data to your backend,
+            // which would then forward it to the Telegram Bot API
+            
+            // Format message for Telegram
+            let message = "🎓 *Pendaftaran Baru SMA Negeri 1 Pare-Pare* 🎓\n\n";
+            message += `👤 *Nama:* ${data.nama}\n`;
+            message += `🏙️ *Tempat Lahir:* ${data.tempatLahir}\n`;
+            message += `📅 *Tanggal Lahir:* ${data.tanggalLahir}\n`;
+            message += `🆔 *NISN:* ${data.nisn}\n`;
+            message += `📧 *Email:* ${data.email}\n`;
+            message += `📱 *Telepon:* ${data.telepon}\n`;
+            message += `🏫 *Asal Sekolah:* ${data.asalSekolah}\n`;
+            message += `📝 *Alasan:* ${data.alasan}\n`;
+            
+            // For demonstration purposes only - this would normally be handled by your backend
+            console.log("Formatted message for Telegram:", message);
+            
+            // In a real implementation, you would make an API call to your server:
+            /*
+            fetch('https://your-backend-server.com/send-to-telegram', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: message,
+                    chat_id: 'YOUR_CHAT_ID_HERE'
+                })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch((error) => console.error('Error:', error));
+            */
         }
-        random -= item.chance;
-    }
-    
-    // Default fallback
-    return items[items.length - 1];
-}
-
-// Spin the wheel animation
-function spinWheel() {
-    if (coins < gachaCost) {
-        alert("Tidak cukup koin! Kamu membutuhkan " + gachaCost + " koin untuk gacha.");
-        return;
-    }
-    
-    coins -= gachaCost;
-    coinCounter.textContent = coins;
-    
-    const selectedItem = selectRandomItem();
-    const resultIndex = items.findIndex(item => item.name === selectedItem.name);
-    const spinAngle = 1800 + (360 / items.length * resultIndex);
-    
-    // Reset any previous animation
-    wheel.style.transition = 'none';
-    wheel.style.transform = 'rotate(0deg)';
-    
-    // Force reflow to ensure the animation works
-    void wheel.offsetWidth;
-    
-    // Add spinning animation
-    wheel.style.transition = 'transform 3s cubic-bezier(0.17, 0.67, 0.83, 0.67)';
-    wheel.style.transform = `rotate(${spinAngle}deg)`;
-    
-    // Disable button during animation
-    gachaButton.disabled = true;
-    
-    // Show result after animation
-    setTimeout(() => {
-        showResult(selectedItem);
-        gachaButton.disabled = false;
-    }, 3000);
-}
-
-// Show the result of the gacha
-function showResult(item) {
-    resultTitle.textContent = getResultTitle(item.rarity);
-    resultImage.style.backgroundImage = `url(${item.image})`;
-    resultImage.style.backgroundColor = getColorByRarity(item.rarity);
-    resultText.textContent = `Kamu mendapatkan 1 ${item.name}!`;
-    
-    // Set random details
-    growIDSpan.textContent = growIDs[Math.floor(Math.random() * growIDs.length)];
-    secretCodeSpan.textContent = generateSecretCode();
-    worldNameSpan.textContent = worldNames[Math.floor(Math.random() * worldNames.length)];
-    
-    // Show result container with a shake effect
-    resultContainer.style.display = 'block';
-    resultContainer.classList.add('shake-effect');
-    
-    // Remove effect after animation
-    setTimeout(() => {
-        resultContainer.classList.remove('shake-effect');
-    }, 500);
-}
-
-// Get result title based on rarity
-function getResultTitle(rarity) {
-    switch(rarity) {
-        case "Legendary": return "WOW! LEGENDARY!";
-        case "Epic": return "HEBAT! EPIC!";
-        case "Rare": return "KEREN! RARE!";
-        case "Uncommon": return "NICE! UNCOMMON!";
-        case "Common": return "DAPAT COMMON!";
-        default: return "SELAMAT!";
-    }
-}
-
-// Initialize the game
-function initGame() {
-    // Update coin counter
-    coinCounter.textContent = coins;
-    
-    // Create wheel sections
-    createWheelSections();
-    
-    // Show wheel container
-    wheelContainer.style.display = 'block';
-    
-    // Add event listener to gacha button
-    gachaButton.addEventListener('click', spinWheel);
-    
-    // Splash screen animations
-    loadingProgress.style.width = '100%';
-    
-    // Hide splash screen after loading animation
-    setTimeout(() => {
-        splashScreen.style.display = 'none';
-    }, 3000);
-}
-
-// Start the game
-window.addEventListener('load', initGame);
     </script>
+</body>
+</html>
