@@ -369,4 +369,71 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const coinCountElement = document.getElementById('coinCount');
+    const wheelContainer = document.getElementById('wheelContainer');
+    const wheel = document.getElementById('wheel');
+    const gachaButton = document.querySelector('.gacha-button');
+    const resultContainer = document.querySelector('.result-container');
+    const loadingProgress = document.getElementById('loadingProgress');
+    let coins = parseInt(coinCountElement.innerText);
+
+    gachaButton.addEventListener('click', () => {
+        if (coins >= 10) { // You need at least 10 coins to spin
+            coins -= 10;
+            coinCountElement.innerText = coins;
+
+            // Show loading screen
+            document.getElementById('splashScreen').style.display = 'flex';
+            loadingProgress.style.width = '0%';
+            setTimeout(() => {
+                loadingProgress.style.width = '100%';
+            }, 100);
+
+            // Simulate the spin
+            setTimeout(() => {
+                // Spin animation (randomize the rotation)
+                const rotation = Math.floor(Math.random() * 360);
+                wheel.style.transition = 'transform 3s cubic-bezier(0.17, 0.67, 0.83, 0.67)';
+                wheel.style.transform = `rotate(${360 + rotation}deg)`;
+
+                // After spin, show result
+                setTimeout(() => {
+                    showResult(rotation);
+                }, 3000);
+            }, 2000);
+        } else {
+            alert('Not enough coins!');
+        }
+    });
+
+    function showResult(rotation) {
+        // Hide loading screen
+        document.getElementById('splashScreen').style.display = 'none';
+
+        // Here, you can set a result based on the rotation
+        const result = getItemFromRotation(rotation);
+
+        // Show result
+        resultContainer.style.display = 'block';
+        resultContainer.querySelector('.result-title').innerText = `You got: ${result.name}`;
+        resultContainer.querySelector('.item-image').style.backgroundImage = `url(${result.image})`;
+    }
+
+    function getItemFromRotation(rotation) {
+        // Just a basic logic to assign items based on rotation range
+        const items = [
+            { name: 'Crystal Wings', image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAATklEQVR4nO3VMQ4AIAgDwPz/0c6OTiboyGIH7tIQ0gPAL1J0T7u7YTi/A03u7zMSx1MOWKfQ1QEHOMABDnDAWWVfA56zX71AXutMAKBHARjlHAchLZ1FAAAAAElFTkSuQmCC' },
+            { name: 'Dragon Blade', image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAASklEQVR4nO3VsQ0AMAgDQbJc9l+C0ckBJUKxcgV3DRJyAKAXidqp4Ur26zDxbSQAcCBp9cDLRp57UQMOOGD2wPYF5jHE9QIAP3QAbJweB+IAQC0AAAAASUVORK5CYII=' },
+            { name: 'Rainbow Block', image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAQUlEQVR4nO3VsQ0AMAgDQYZj/yUYnbQoNVLuCq6JhBQA6EVi7ajxEAiEQMqIRkTCMvnUO0BsRTqQ+dv3UgDQQx3hpxoHmT13eQAAAABJRU5ErkJggg==' }
+        ];
+
+        const sectionCount = 3; // Based on 3 sections in the wheel
+        const sectionRotation = 360 / sectionCount;
+        const index = Math.floor((rotation % 360) / sectionRotation);
+
+        return items[index];
+    }
+});
+    </script>
